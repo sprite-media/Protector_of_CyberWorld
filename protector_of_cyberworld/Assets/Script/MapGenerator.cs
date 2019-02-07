@@ -19,11 +19,12 @@ public class MapGenerator : MonoBehaviour
 		tile[0] = Resources.Load("Tile", typeof(GameObject)) as GameObject;
 		tile[1] = Resources.Load("Path", typeof(GameObject)) as GameObject;
 		tile[2] = tile[1];
-		/*
+	
 		tile[3] = Resources.Load("Tower", typeof(GameObject)) as GameObject;
-		tile[4] = Resources.Load("Trap", typeof(GameObject)) as GameObject;
-		//*/
-		tile[5] = Resources.Load("Spawner", typeof(GameObject)) as GameObject;
+        /*
+          tile[4] = Resources.Load("Trap", typeof(GameObject)) as GameObject;
+        //*/
+        tile[5] = Resources.Load("Spawner", typeof(GameObject)) as GameObject;
 
 		playerBase = Resources.Load("Base", typeof(GameObject)) as GameObject;
 
