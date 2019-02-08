@@ -15,77 +15,104 @@ public class MapGenerator : MonoBehaviour
 
 	private void Awake()
 	{
-		tile = new GameObject[6];
-		tile[0] = Resources.Load("Tile", typeof(GameObject)) as GameObject;
-		tile[1] = Resources.Load("Path", typeof(GameObject)) as GameObject;
-		tile[2] = tile[1];
-	
-		tile[3] = Resources.Load("Tower", typeof(GameObject)) as GameObject;
-        /*
-          tile[4] = Resources.Load("Trap", typeof(GameObject)) as GameObject;
-        //*/
-        tile[5] = Resources.Load("Spawner", typeof(GameObject)) as GameObject;
+		if (mapData == null)
+		{
+			tile = new GameObject[6];
+			tile[0] = Resources.Load("Tile", typeof(GameObject)) as GameObject;
+			tile[1] = Resources.Load("Path", typeof(GameObject)) as GameObject;
+			tile[2] = tile[1];
 
-		playerBase = Resources.Load("Base", typeof(GameObject)) as GameObject;
+			tile[3] = Resources.Load("Tower", typeof(GameObject)) as GameObject;
+			/*
+			  tile[4] = Resources.Load("Trap", typeof(GameObject)) as GameObject;
+			//*/
+			tile[5] = Resources.Load("Spawner", typeof(GameObject)) as GameObject;
 
-		LoadMapData();
+			playerBase = Resources.Load("Base", typeof(GameObject)) as GameObject;
+
+			LoadMapData();
+		}
+		else
+		{
+			Destroy(gameObject);
+			return;
+		}
 	}
 
 	private void LoadMapData()
 	{
-		if (mapData == null)
-		{
-			TextAsset mapCSV = Resources.Load("MapData", typeof(TextAsset)) as TextAsset;
-			string[] column = mapCSV.text.Split('\n');
-			string[] row = column[0].Split(',');
+		TextAsset mapCSV = Resources.Load("MapData", typeof(TextAsset)) as TextAsset;
+		string[] column = mapCSV.text.Split('\n');
+		string[] row = column[0].Split(',');
 			mapData = new int[column.Length,row.Length];
-			x = column.Length;
-			z = row.Length;
-			GameObject tempBase = null;
+		x = column.Length;
+		z = row.Length;
+		GameObject temp = null;
 
-			//* convert map data text into int and generate map
-			for (int i = 0; i < column.Length; i++)
+		// convert map data text into int and generate map
+		for (int i = 0; i < x; i++)
+		{
+			row = column[i].Split(',');
+			for (int j = 0; j < z; j++)
 			{
-				row = column[i].Split(',');
-				for (int j = 0; j < row.Length; j++)
-				{
-					mapData[i, j] = int.Parse(row[j]);
+				mapData[i, j] = int.Parse(row[j]);
+				temp = (GameObject)Instantiate(tile[mapData[i, j]], new Vector3(i, 0, j), tile[mapData[i, j]].transform.rotation);
+				temp.transform.parent = transform;
 
-					if (mapData[i, j] < 3) // 0 : empty tile   1 : enemy path1    2 : enemy path2
+				switch (mapData[i, j])
+				{
+					case 0:// Empty
+					case 1:// Path1
+					case 2:// Path2
 					{
-						GameObject temp = (GameObject)Instantiate(tile[mapData[i, j]], new Vector3(i, 0, j), tile[mapData[i, j]].transform.rotation);
-						temp.transform.parent = transform;
+						/*Transform adjustment if needed
+						temp.transform.position = new Vector3(temp.transform.position.x, VALUE YOU WANT, temp.transform.position.z);
+						//*/
 
 						// Base
-						if (tempBase == null && j == 0 && mapData[i, j] == 1)
+						if (j == 0 && mapData[i, j] == 1)
 						{
-							tempBase = (GameObject)Instantiate(playerBase, new Vector3(i+0.5f, 1, j - 1), playerBase.transform.rotation);
+							Instantiate(playerBase, new Vector3(i + 0.5f, 1, j - 1), playerBase.transform.rotation);
 						}
+							
+						break;
 					}
-					else if (mapData[i, j] < 5) // 3 : Tower    4 : something on enemy path
+					case 3://Tower
 					{
-						//Instantiating Tower/Trap
-						GameObject tempB = (GameObject)Instantiate(tile[mapData[i, j]], new Vector3(i, 0, j), tile[mapData[i, j]].transform.rotation);
-						tempB.transform.parent = transform;
+						//*Transform adjustment if needed
+						temp.transform.position = new Vector3(temp.transform.position.x, 0.5f, temp.transform.position.z);
+						//*/
+						//Creating tile under the tower
+						GameObject tempF = (GameObject)Instantiate(tile[0], new Vector3(i, 0, j), tile[0].transform.rotation);
+						tempF.transform.parent = transform;
+						break;
+					}
+					case 4://Trap
+					{
+						/*Transform adjustment if needed
+						temp.transform.position = new Vector3(temp.transform.position.x, VALUE YOU WANT, temp.transform.position.z);
+						//*/
 
-						//Instantiating floor tile under tower
-						int tempIndex = mapData[i, j] == 3 ? 0 : 1;
-						if (tempIndex == 1 && (mapData[i, j - 1] == 2 || mapData[i, j + 1] == 2))
+						// Create enemy path under the trap and change the map data to enemy path
+						int tempIndex = 1;
+						if (mapData[i, j - 1] == 2 || mapData[i, j + 1] == 2)
 							tempIndex = 2;
 						GameObject tempF = (GameObject)Instantiate(tile[tempIndex], new Vector3(i, 0, j), tile[mapData[i, j]].transform.rotation);
 						tempF.transform.parent = transform;
+						mapData[i, j] = tempIndex;
+						break;
 					}
-					else // 5 : Enemy spawner
+					case 5://Spawner
 					{
-						GameObject temp = (GameObject)Instantiate(tile[mapData[i, j]], new Vector3(i, 0, j), tile[mapData[i, j]].transform.rotation);
-						temp.transform.parent = transform;
+						/*Transform adjustment if needed
+						temp.transform.position = new Vector3(temp.transform.position.x, VALUE YOU WANT, temp.transform.position.z);
+						//*/
+						break;
 					}
 				}
+				//temp = null;
 			}
-			//*/
 		}
-		else
-			return;
 	}
 
 

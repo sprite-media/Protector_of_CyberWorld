@@ -28,7 +28,7 @@ public class PathFinding : MonoBehaviour
                 if (j == 0 && MapGenerator.GetTileType(i, j) == 1)
                 {
                     midLane = i;
-                    Debug.Log(i + " " + j);
+                   // Debug.Log(i + " " + j);
                 }
             }
         }
@@ -47,7 +47,7 @@ public class PathFinding : MonoBehaviour
 
     void Pathfinding1()
     {
-		Debug.Log("PATH1: ");
+		//Debug.Log("PATH1: ");
         for (int i = 0; i < midLane + 1; i++)
         {
             for (int j = MapGenerator.Z - 1; j >= 0; j--)
@@ -59,7 +59,7 @@ public class PathFinding : MonoBehaviour
                 } else if (MapGenerator.GetTileType(i, j) == 5)
                 {
                     spawn[spawnCnt] = new Vector3(i, 0, j);
-                    Debug.Log("s: " + spawn[spawnCnt]);
+                    //Debug.Log("s: " + spawn[spawnCnt]);
                     spawnCnt++;
                     
                 }
@@ -75,17 +75,18 @@ public class PathFinding : MonoBehaviour
         for (int i = 0; i < numOfTile1; i++) {
             path1[i] = path[i];
         }
-		// Debug
+		/* Debug
         for (int k = 0; k < path1.Length; k++)
         {
             Debug.Log(path1[k]);
         }
+		//*/
 
     }
 
 	void Pathfinding2()
 	{
-		Debug.Log("PATH2: ");
+		//Debug.Log("PATH2: ");
 		for (int i = MapGenerator.X - 1; i > midLane; i--)
 		{
 			for (int j = MapGenerator.Z - 1; j >= 0; j--)
@@ -97,7 +98,7 @@ public class PathFinding : MonoBehaviour
 				} else if (MapGenerator.GetTileType(i, j) == 5)
 				{
 					spawn[spawnCnt] = new Vector3(i, 0, j);
-					Debug.Log("s2: " + spawn[spawnCnt]);
+					//Debug.Log("s2: " + spawn[spawnCnt]);
 					spawnCnt++;
 				}
 			}
@@ -111,11 +112,12 @@ public class PathFinding : MonoBehaviour
 		for (int i = 0; i < numOfTile2; i++) {
 			path2[i] = path[i];
 		}
-		// Debug	
+		/* Debug	
 		for (int k = 0; k < path2.Length; k++)
 		{
 			Debug.Log(path2[k]);
 		}
+		//*/
 	}
 
 }
