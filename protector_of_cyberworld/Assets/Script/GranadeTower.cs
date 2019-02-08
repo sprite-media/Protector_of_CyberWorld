@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GranadeTower : Tower
 {
-    private GameObject fireEffect;
+    [SerializeField]private GameObject fireEffect;
 
     new void Start()
     {
