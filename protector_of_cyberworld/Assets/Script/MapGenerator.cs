@@ -22,7 +22,7 @@ public class MapGenerator : MonoBehaviour
 			tile[1] = Resources.Load("Path", typeof(GameObject)) as GameObject;
 			tile[2] = tile[1];
 
-			tile[3] = Resources.Load("Tower", typeof(GameObject)) as GameObject;
+			tile[3] = Resources.Load("LaserTower", typeof(GameObject)) as GameObject;
 			/*
 			  tile[4] = Resources.Load("Trap", typeof(GameObject)) as GameObject;
 			//*/
