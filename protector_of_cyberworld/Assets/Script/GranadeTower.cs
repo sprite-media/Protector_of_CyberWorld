@@ -6,10 +6,11 @@ public class GranadeTower : Tower
 {
     private GameObject fireEffect;
 
-    void Start()
+    new void Start()
     {
+        base.Start();
         fireEffect = Resources.Load("Granade", typeof(GameObject)) as GameObject;
-        firePoint = transform.Find("PartRotation").Find("Firepoint");
+        fireRate = 1.0f;
     }
 
     new void Update()

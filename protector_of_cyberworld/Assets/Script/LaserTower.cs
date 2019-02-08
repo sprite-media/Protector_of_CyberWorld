@@ -8,11 +8,10 @@ public class LaserTower : Tower
     private float dist;
     public float lineDrawSpeed = 6.0f;
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
-        laser = transform.Find("PartRotation").Find("Laser").GetComponent<LineRenderer>();
-        laser.SetPosition(0, firePoint.position);
-        firePoint = transform.Find("PartRotation").Find("Firepoint");
+        base.Start();
+        laser = transform.Find("Laser").GetComponent<LineRenderer>();        
         fireRate = 0.5f;
     }
 
@@ -25,6 +24,8 @@ public class LaserTower : Tower
     public override void Shoot()
     {
         laser.enabled = true;
+        laser.SetPosition(0, firePoint.position);
+        laser.SetPosition(1, target.position);
     }
 
     public override void PreparedToShoot()
@@ -34,9 +35,12 @@ public class LaserTower : Tower
             Shoot();
             fireCountdown = 1f / fireRate;
         }
+        else
+            laser.enabled = false;
 
         fireCountdown -= Time.deltaTime;
     }
+
     public override void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

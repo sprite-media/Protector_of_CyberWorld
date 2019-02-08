@@ -7,25 +7,27 @@ public abstract class Tower : MonoBehaviour
     protected Transform target;
 
     public float range = 5.0f;
-    public float fireRate = 1f;
+    public float fireRate;
     public float weaponDmg = 1f;
     public float fireCountdown = 0f;
 
     public string enemyTag = "Enemy";
 
-    public Transform partToRatate;
-    public float turnSpeed = 10f;
+    protected Transform partToRatate;
+    protected Transform firePoint;
 
-    public Transform firePoint;
+    public float turnSpeed = 10f;    
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         InvokeRepeating("UpdateTarget", 0f, 0.5f); // Inorder to not to call UpdateTarget function in every frame.
-    }
+        partToRatate = transform.Find("PartRotation");
+        firePoint = transform.Find("PartRotation").Find("Sphere").Find("Firepoint");
+        }
 
-    // Update is called once per frame
-    public void Update()
+        // Update is called once per frame
+        public void Update()
     {
         UpdateTarget();
 
@@ -37,12 +39,12 @@ public abstract class Tower : MonoBehaviour
         Vector3 rotation = Quaternion.Lerp(partToRatate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
         partToRatate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
         PreparedToShoot();
-
-
     }
+
     abstract public void Shoot();
     abstract public void OnDrawGizmosSelected();
     abstract public void PreparedToShoot();
+
     public void UpdateTarget()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
@@ -61,6 +63,7 @@ public abstract class Tower : MonoBehaviour
 
         if (nearestEnemy != null && shortestDistance <= range)
         {
+            Debug.Log("Rotation");
             target = nearestEnemy.transform;
         }
         else
