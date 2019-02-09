@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 1254358600872712135}
   - component: {fileID: 3064552537327623673}
   - component: {fileID: 1464032463116657638}
+  - component: {fileID: 4704213753120948418}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Granade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,3 +93,16 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4704213753120948418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8458773956148100134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c55acb45548d2643be56950a2646eb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
