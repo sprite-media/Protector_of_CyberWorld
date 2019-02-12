@@ -23,7 +23,7 @@ public class RespawnScript : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime; //timing here
-        Debug.Log(timer);
+        //Debug.Log(timer);
         if (timer >= spawnTime)
         {
             hasSpawn = false;
@@ -40,7 +40,7 @@ public class RespawnScript : MonoBehaviour
     public void RandomTime()
     {
         spawnTime = Random.Range(minSpawnTime, maxSpawnTime);
-        Debug.Log(spawnTime);
+        //Debug.Log(spawnTime);
     }
     public void EnemySpawn()
     {

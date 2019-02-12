@@ -7,8 +7,8 @@ public class PathFinding : MonoBehaviour
 
 	private static Vector3[] path = null;
     private static Vector3[] spawn = null;
-    private static Vector3[] path1 = null;
-	private static Vector3[] path2 = null;
+    private static Vector3[] path1;
+	private static Vector3[] path2;
     private int spawnCnt = 0;
     private int tileCnt = 0;
     public static int numOfTile1 = 0, numOfTile2 = 0;

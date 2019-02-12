@@ -50,7 +50,7 @@ public class Base : MonoBehaviour
 	public static void TakeDamage(float amt)
 	{
 		hp = Mathf.Clamp(hp - amt, 0, hp);
-		//Debug.Log(hp);
+		Debug.Log(hp);
 		//Update Health bar
 		if (hp == 0)
 		{
