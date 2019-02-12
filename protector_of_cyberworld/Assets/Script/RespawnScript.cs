@@ -46,10 +46,10 @@ public class RespawnScript : MonoBehaviour
     {
         if(numOfEnemy >= maxEnmey)
         {
-            hasSpawn = false; //enable to spawn enemy   
+            hasSpawn = false; //enable to spawn enemy   s
             return;
         }
-        GameObject Enemy = Instantiate(enemy, spawner.position, spawner.rotation); //enemy spawned here
+        GameObject Enemy = Instantiate(enemy, new Vector3(spawner.position.x, spawner.position.y, spawner.position.z), spawner.rotation); //enemy spawned here
         numOfEnemy++;
         //Debug.Log(numOfEnemy);
     }

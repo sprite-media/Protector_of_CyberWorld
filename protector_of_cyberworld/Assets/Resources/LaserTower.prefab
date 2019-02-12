@@ -454,8 +454,6 @@ MonoBehaviour:
   weaponDmg: 1
   fireCountdown: 0
   enemyTag: Enemy
-  partToRatate: {fileID: 0}
-  firePoint: {fileID: 0}
   turnSpeed: 10
   lineDrawSpeed: 6
 --- !u!1 &8392974278324860936
@@ -496,11 +494,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5063832535631357270}
     m_Modifications:
-    - target: {fileID: 977284357979858068, guid: d815a5bc4148cd7479aff0a8a7e1a3b0,
-        type: 3}
-      propertyPath: m_Name
-      value: Firepoint
-      objectReference: {fileID: 0}
     - target: {fileID: 1285626173856872065, guid: d815a5bc4148cd7479aff0a8a7e1a3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -565,6 +558,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.2000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 977284357979858068, guid: d815a5bc4148cd7479aff0a8a7e1a3b0,
+        type: 3}
+      propertyPath: m_Name
+      value: Firepoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d815a5bc4148cd7479aff0a8a7e1a3b0, type: 3}
