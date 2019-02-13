@@ -28,7 +28,7 @@ namespace Hyukin
 
         protected virtual void Shoot()
         {
-            Debug.Log("Bang!");
+            //Debug.Log("Bang!");
             timer = 0;
         }
 

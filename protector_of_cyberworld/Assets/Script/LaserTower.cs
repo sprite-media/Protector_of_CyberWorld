@@ -23,7 +23,7 @@ public class LaserTower : Tower
 
     public override void Shoot()
     {
-        Debug.Log("SSSSS");
+        ///Debug.Log("SSSSS");
         laser.enabled = true;
         laser.SetPosition(0, firePoint.position);
         laser.SetPosition(1, target.position);

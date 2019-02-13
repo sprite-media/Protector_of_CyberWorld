@@ -21,6 +21,7 @@ public class RespawnScript : MonoBehaviour
 	void Start()
     {
         RandomTime(); //set a spawn timer
+        Base.SetTotalNumEnemy(maxEnmey * 2);
     }
 
     void Update()

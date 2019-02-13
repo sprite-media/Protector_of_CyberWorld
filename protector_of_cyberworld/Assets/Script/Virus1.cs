@@ -87,7 +87,7 @@ public class Virus1 : MonoBehaviour
 
     void Death()
     {
-        Debug.Log("AAAAA!!!");
+        //Debug.Log("AAAAA!!!");
         Base.ReduceNumEnemy();
         Destroy(gameObject);
     }

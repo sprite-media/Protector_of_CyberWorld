@@ -48,7 +48,7 @@ namespace Hyukin
              
                 if (hit.transform.tag == "Enemy")
                 {
-                    Debug.Log("takeDDDD");
+                    //Debug.Log("takeDDDD");
                     hit.transform.GetComponent<Virus1>().TakeDamage(damage);
                 }
             }

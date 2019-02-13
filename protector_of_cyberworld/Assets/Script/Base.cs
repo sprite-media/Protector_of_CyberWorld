@@ -29,12 +29,15 @@ public class Base : MonoBehaviour
 	private void Start()
     {
 		//*/ assigning temp value
-		numEnemiesLeft = 10;
+		//numEnemiesLeft = 10;
 		/*/
 		numEnemiesLeft = Spawner.NumTotalEnemy;
 		//*/
     }
-
+    public static void SetTotalNumEnemy(int num)
+    {
+        numEnemiesLeft = num;
+    }
 	private void Win()
 	{
 		//Display Win text
