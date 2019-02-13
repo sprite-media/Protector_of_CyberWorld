@@ -63,7 +63,7 @@ public abstract class Tower : MonoBehaviour
 
         if (nearestEnemy != null && shortestDistance <= range)
         {
-            Debug.Log("Rotation");
+            //Debug.Log("Rotation");
             target = nearestEnemy.transform;
         }
         else
