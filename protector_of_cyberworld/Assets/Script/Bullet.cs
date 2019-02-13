@@ -34,6 +34,7 @@ public class Bullet : MonoBehaviour
 
     void HitTarget()
     {
+        target.GetComponent<Virus1>().TakeDamage(3);
         Destroy(gameObject);
     }
 

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LaserTower : Tower
@@ -7,6 +6,7 @@ public class LaserTower : Tower
     private LineRenderer laser;
     private float dist;
     public float lineDrawSpeed = 6.0f;
+    public float lineCool = 1.0f;
     // Start is called before the first frame update
     new void Start()
     {
@@ -23,22 +23,30 @@ public class LaserTower : Tower
 
     public override void Shoot()
     {
+        Debug.Log("SSSSS");
         laser.enabled = true;
         laser.SetPosition(0, firePoint.position);
         laser.SetPosition(1, target.position);
+        target.GetComponent<Virus1>().TakeDamage(3);
+        StartCoroutine("TurnOffLaser");
+    }
+
+    IEnumerator TurnOffLaser()
+    {
+        yield return new WaitForSeconds(0.1f);
+        laser.enabled = false;
     }
 
     public override void PreparedToShoot()
     {
-        if (fireCountdown <= 0f)
+        if (fireCountdown >= fireRate)
         {
             Shoot();
-            fireCountdown = 1f / fireRate;
+            fireCountdown = 0.0f;
+          
         }
-        else
-            laser.enabled = false;
 
-        fireCountdown -= Time.deltaTime;
+        fireCountdown += Time.deltaTime;
     }
 
     public override void OnDrawGizmosSelected()

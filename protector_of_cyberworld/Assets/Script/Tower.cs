@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Tower : MonoBehaviour
@@ -7,8 +6,9 @@ public abstract class Tower : MonoBehaviour
     protected Transform target;
 
     public float range = 5.0f;
-    public float fireRate;
     public float weaponDmg = 1f;
+
+    public float fireRate = 0.5f;
     public float fireCountdown = 0f;
 
     public string enemyTag = "Enemy";
@@ -24,10 +24,10 @@ public abstract class Tower : MonoBehaviour
         InvokeRepeating("UpdateTarget", 0f, 0.5f); // Inorder to not to call UpdateTarget function in every frame.
         partToRatate = transform.Find("PartRotation");
         firePoint = transform.Find("PartRotation").Find("Sphere").Find("Firepoint");
-        }
+    }
 
         // Update is called once per frame
-        public void Update()
+    public void Update()
     {
         UpdateTarget();
 
@@ -38,12 +38,14 @@ public abstract class Tower : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(partToRatate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
         partToRatate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+
         PreparedToShoot();
     }
 
     abstract public void Shoot();
     abstract public void OnDrawGizmosSelected();
     abstract public void PreparedToShoot();
+
 
     public void UpdateTarget()
     {

@@ -6,6 +6,10 @@ public class Virus1 : MonoBehaviour
 {
 	private Vector3[] path;
 
+    // Hykkin
+    [SerializeField] int hp = 3;
+    //
+
 	private int pathIndex = 0;
 	private Vector3 target;
 	bool isAttacking;
@@ -76,5 +80,24 @@ public class Virus1 : MonoBehaviour
             attackTimer = 0;
         }
         attackTimer += Time.deltaTime;
+    }
+
+
+    //
+
+    void Death()
+    {
+        Debug.Log("AAAAA!!!");
+        Base.ReduceNumEnemy();
+        Destroy(gameObject);
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        hp -= dmg;
+        if(hp <= 0)
+        {
+            Death();
+        }
     }
 }
