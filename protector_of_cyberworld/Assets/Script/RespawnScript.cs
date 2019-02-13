@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class RespawnScript : MonoBehaviour
 {
-    [SerializeField] private GameObject enemy;
-    [SerializeField] private Transform spawner;
+    private GameObject enemy;
 
     public int maxEnmey = 5;
     private int numOfEnemy = 0;
@@ -15,7 +14,11 @@ public class RespawnScript : MonoBehaviour
     private float spawnTime;
     private bool hasSpawn = true; //check if enemy has been spawned
 
-    void Start()
+	private void Awake()
+	{
+		enemy = Resources.Load("Enemy", typeof(GameObject)) as GameObject;
+	}
+	void Start()
     {
         RandomTime(); //set a spawn timer
     }
@@ -49,7 +52,8 @@ public class RespawnScript : MonoBehaviour
             hasSpawn = false; //enable to spawn enemy   s
             return;
         }
-        GameObject Enemy = Instantiate(enemy, new Vector3(spawner.position.x, spawner.position.y, spawner.position.z), spawner.rotation); //enemy spawned here
+		Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + enemy.transform.localScale.y/2.0f, transform.position.z);
+        GameObject Enemy = Instantiate(enemy, spawnPosition, transform.rotation); //enemy spawned here
         numOfEnemy++;
         //Debug.Log(numOfEnemy);
     }

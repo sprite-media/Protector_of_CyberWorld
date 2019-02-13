@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class Virus1 : MonoBehaviour
 {
-    private Vector3[] path;
+	private Vector3[] path;
 
-    private int pathIndex = 0;
-    private Vector3 target;
-    bool isAttacking;
-    float attackTimer = 0;
+	private int pathIndex = 0;
+	private Vector3 target;
+	bool isAttacking;
+	float attackTimer = 0;
     
 
-    private void Awake()
-    {
-        
-        pathIndex = 0;
-        isAttacking = false;
+	private void Awake()
+	{
+		pathIndex = 0;
+		isAttacking = false;
 
-        if (this.transform.position.x == PathFinding.Path1[0].x)
-            path = PathFinding.Path1;
-        else
-            path = PathFinding.Path2;
+		if (this.transform.position.x == PathFinding.Path1[0].x)
+			path = PathFinding.Path1;
+		else
+			path = PathFinding.Path2;
 
         /*
         for (int i = 0; i < path.Length; i++)
@@ -29,38 +28,38 @@ public class Virus1 : MonoBehaviour
             Debug.Log(path[i]);
         }
         //*/
-    }
+	}
 
     // Start is called before the first frame update
-    void Start()
-    {
-        target = path[pathIndex];
-    }
+	void Start()
+	{
+		target = new Vector3(path[pathIndex].x , path[pathIndex].y + transform.localScale.y/2.0f, path[pathIndex].z);
+	}
 
     // Update is called once per frame
-    void Update()
-    {
-        if (!isAttacking)
-        {
-            if (Vector3.Distance(this.transform.position, target) < 0.1f)
-            {
-                pathIndex++;
-                if (pathIndex >= path.Length)
+	void Update()
+	{
+		if (!isAttacking)
+		{
+			if (Vector3.Distance(this.transform.position, target) < 0.1f)
+			{
+				pathIndex++;
+				if (pathIndex >= path.Length)
+				{
+					isAttacking = true;
+				}
+				else
                 {
-                    isAttacking = true;
-                }
-                else
-                {
-                    
-                    target = path[pathIndex];
-                }
-            }
-            Move();
+
+					target = new Vector3(path[pathIndex].x, path[pathIndex].y + transform.localScale.y / 2.0f, path[pathIndex].z);
+				}
+			}
+			Move();
         }
-        else
-            Attack();
-        
-        
+		else
+		{
+			Attack();
+		}
     }
 
     void Move()
@@ -69,13 +68,13 @@ public class Virus1 : MonoBehaviour
         transform.Translate(Vector3.forward * 5.0f * Time.deltaTime);
     }
 
-    void Attack() {
+    void Attack()
+	{
         if (attackTimer > 2)
         {
             Base.TakeDamage(1);
             attackTimer = 0;
         }
         attackTimer += Time.deltaTime;
-
     }
 }
