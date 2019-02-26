@@ -4,23 +4,20 @@ using UnityEngine;
 
 public class PathFinding : MonoBehaviour
 {
+	private Vector3[] path = null;
+    private Vector3[] path1 = null;
+	private Vector3[] path2 = null;
 
-	private static Vector3[] path = null;
-    private static Vector3[] spawn = null;
-    private static Vector3[] path1;
-	private static Vector3[] path2;
-    private int spawnCnt = 0;
     private int tileCnt = 0;
-    public static int numOfTile1 = 0, numOfTile2 = 0;
-    int midLane, pathSize;
-	public static Vector3[] Path1 { get { return path1; } }
-	public static Vector3[] Path2 { get { return path2; } }
+    private int numOfTile1 = 0, numOfTile2 = 0;
+    private int midLane;
 
+	private static Vector3[][] totalPath = null;
+	public static Vector3[][] Path { get { return totalPath; } }
 
-
-    // Start is called before the first frame update
     void Start()
     {
+		//Finding mid point
         for (int i = 0; i < MapGenerator.X; i++)
         {
             for (int j = 0; j < MapGenerator.Z; j++)
@@ -28,26 +25,34 @@ public class PathFinding : MonoBehaviour
                 if (j == 0 && MapGenerator.GetTileType(i, j) == 1)
                 {
                     midLane = i;
-                   // Debug.Log(i + " " + j);
                 }
             }
         }
-        //v temp size
-        pathSize = MapGenerator.Z * MapGenerator.X;
 
+        // Calculating total path size and create array
+        int pathSize = MapGenerator.Z * MapGenerator.X;
         path = new Vector3[pathSize];
-        spawn = new Vector3[2];
-
 
         Pathfinding1();
 		Pathfinding2();
-    }
+
+		totalPath = new Vector3[2][];
+		totalPath[0] = new Vector3[numOfTile1];
+		totalPath[1] = new Vector3[numOfTile2];
+		for (int i = 0; i < numOfTile1; i++)
+		{
+			totalPath[0][i] = path1[i];
+		}
+		for (int i = 0; i < numOfTile2; i++)
+		{
+			totalPath[1][i] = path2[i];
+		}
+	}
 
 
 
     void Pathfinding1()
     {
-		//Debug.Log("PATH1: ");
         for (int i = 0; i < midLane + 1; i++)
         {
             for (int j = MapGenerator.Z - 1; j >= 0; j--)
@@ -56,12 +61,6 @@ public class PathFinding : MonoBehaviour
                 {
                     path[tileCnt] = new Vector3(i, 0, j);
                     tileCnt++;
-                } else if (MapGenerator.GetTileType(i, j) == 5)
-                {
-                    spawn[spawnCnt] = new Vector3(i, 0, j);
-                    //Debug.Log("s: " + spawn[spawnCnt]);
-                    spawnCnt++;
-                    
                 }
 
             }
@@ -74,19 +73,11 @@ public class PathFinding : MonoBehaviour
 
         for (int i = 0; i < numOfTile1; i++) {
             path1[i] = path[i];
-        }
-		/* Debug
-        for (int k = 0; k < path1.Length; k++)
-        {
-            Debug.Log(path1[k]);
-        }
-		//*/
-
+        } 
     }
 
 	void Pathfinding2()
 	{
-		//Debug.Log("PATH2: ");
 		for (int i = MapGenerator.X - 1; i > midLane; i--)
 		{
 			for (int j = MapGenerator.Z - 1; j >= 0; j--)
@@ -95,11 +86,6 @@ public class PathFinding : MonoBehaviour
 				{
 					path[tileCnt] = new Vector3(i, 0, j);
 					tileCnt++;
-				} else if (MapGenerator.GetTileType(i, j) == 5)
-				{
-					spawn[spawnCnt] = new Vector3(i, 0, j);
-					//Debug.Log("s2: " + spawn[spawnCnt]);
-					spawnCnt++;
 				}
 			}
 		}
@@ -112,12 +98,6 @@ public class PathFinding : MonoBehaviour
 		for (int i = 0; i < numOfTile2; i++) {
 			path2[i] = path[i];
 		}
-		/* Debug	
-		for (int k = 0; k < path2.Length; k++)
-		{
-			Debug.Log(path2[k]);
-		}
-		//*/
 	}
 
 }
