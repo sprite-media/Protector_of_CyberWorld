@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class RespawnScript : MonoBehaviour
 {
-    private GameObject enemy;
+    private GameObject[] enemy;
+	private int enemyType = 0;
 
-    public int maxEnmey = 5;
-    private int numOfEnemy = 0;
+	public int maxEnmey; //max number of enemies per spawner
+	private int[] maxVirus = { 3, 2 };
+	private int numOfEnemy = 0; // number of spawned enemies
     public float minSpawnTime = 5.0f;
     public float maxSpawnTime = 10.0f;
     private float timer = 0.0f; //timer
@@ -16,7 +18,10 @@ public class RespawnScript : MonoBehaviour
 
 	private void Awake()
 	{
-		enemy = Resources.Load("Enemy", typeof(GameObject)) as GameObject;
+		maxEnmey = maxVirus[0] + maxVirus[1];
+		enemy = new GameObject[2];
+		enemy[0] = Resources.Load("Virus1", typeof(GameObject)) as GameObject;
+		enemy[1] = Resources.Load("Virus2", typeof(GameObject)) as GameObject;
 	}
 	void Start()
     {
@@ -53,8 +58,18 @@ public class RespawnScript : MonoBehaviour
             hasSpawn = false; //enable to spawn enemy   s
             return;
         }
-		Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + enemy.transform.localScale.y/2.0f, transform.position.z);
-        GameObject Enemy = Instantiate(enemy, spawnPosition, transform.rotation); //enemy spawned here
+
+		// Decide enemy type
+		enemyType = Random.Range(0, 2);
+		while (maxVirus[enemyType] == 0)
+		{
+			enemyType = Random.Range(0, enemy.Length);
+		}
+		maxVirus[enemyType]--;
+
+		// spawn enemy
+		Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + enemy[enemyType].transform.localScale.y/2.0f, transform.position.z);
+        Instantiate(enemy[enemyType], spawnPosition, transform.rotation); //enemy spawned here
         numOfEnemy++;
         //Debug.Log(numOfEnemy);
     }

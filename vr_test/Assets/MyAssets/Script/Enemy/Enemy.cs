@@ -33,18 +33,7 @@ public abstract class Enemy : MonoBehaviour
 	{
 		if (!isAttacking)
 		{
-			if (Vector3.Distance(this.transform.position, target) < 0.1f)
-			{
-				pathIndex++;
-				if (pathIndex >= PathFinding.Path[pathType].Length)
-				{
-					isAttacking = true;
-				}
-				else
-				{
-					UpdateTargetPath();
-				}
-			}
+			
 			Move();
 		}
 		else
@@ -63,6 +52,18 @@ public abstract class Enemy : MonoBehaviour
 	{
 		transform.LookAt(target);
 		transform.Translate(Vector3.forward * 5.0f * Time.deltaTime);
+		if (Vector3.Distance(this.transform.position, target) < 0.1f)
+		{
+			pathIndex++;
+			if (pathIndex >= PathFinding.Path[pathType].Length)
+			{
+				isAttacking = true;
+			}
+			else
+			{
+				UpdateTargetPath();
+			}
+		}
 		// animation control
 	}
 

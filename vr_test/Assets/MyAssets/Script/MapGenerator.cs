@@ -23,7 +23,7 @@ public class MapGenerator : MonoBehaviour
 			tile[2] = tile[1];
 
 			tile[3] = Resources.Load("LaserTower", typeof(GameObject)) as GameObject;
-			/*
+			//*
 			  tile[4] = Resources.Load("Trap", typeof(GameObject)) as GameObject;
 			//*/
 			tile[5] = Resources.Load("Spawner", typeof(GameObject)) as GameObject;
@@ -89,8 +89,8 @@ public class MapGenerator : MonoBehaviour
 					}
 					case 4://Trap
 					{
-						/*Transform adjustment if needed
-						temp.transform.position = new Vector3(temp.transform.position.x, VALUE YOU WANT, temp.transform.position.z);
+						//*Transform adjustment if needed
+						temp.transform.position = new Vector3(temp.transform.position.x, 0.65f, temp.transform.position.z);
 						//*/
 
 						// Create enemy path under the trap and change the map data to enemy path
