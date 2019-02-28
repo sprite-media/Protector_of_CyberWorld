@@ -9,6 +9,7 @@ public class GranadeTower : Tower
     new void Start()
     {
         base.Start();
+        hp = 4.0f;
         fireEffect = Resources.Load("Granade", typeof(GameObject)) as GameObject;
         fireRate = 1.0f;
     }
@@ -36,6 +37,27 @@ public class GranadeTower : Tower
         {
             bullet.Seek(target);
         }
+    }
+
+    public override void TakeDamage(int _dmg)
+    {
+        hp -= _dmg;
+        if (hp <= 0)
+        {
+            //Effect for disappearing tower
+            //Instantiate effect.........
+            StartCoroutine("waitForDeath");
+        }
+    }
+    IEnumerator waitForDeath()
+    {
+        yield return new WaitForSeconds(0.2f);
+        Death();
+    }
+
+    public override void Death()
+    {
+        Destroy(gameObject);
     }
 
     public override void OnDrawGizmosSelected()
