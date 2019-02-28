@@ -104,3 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 970b0f1d091cd364da42a79f971b5c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winCondition: {fileID: 3166974803234410848, guid: ac3bd617ea841fe4b984a0ab33a17bb7,
+    type: 3}
+  loseCondition: {fileID: 3710625320473695194, guid: 0d837b4b009cd0f46a85cb184651eb45,
+    type: 3}

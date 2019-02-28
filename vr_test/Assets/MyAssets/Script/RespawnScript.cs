@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class RespawnScript : MonoBehaviour
 {
     private GameObject enemy;
-
     public int maxEnmey = 5;
     private int numOfEnemy = 0;
     public float minSpawnTime = 5.0f;
@@ -16,8 +16,8 @@ public class RespawnScript : MonoBehaviour
 
 	private void Awake()
 	{
-		enemy = Resources.Load("Enemy", typeof(GameObject)) as GameObject;
-	}
+		enemy = Resources.Load("Enemy", typeof(GameObject)) as GameObject;     
+    }
 	void Start()
     {
         RandomTime(); //set a spawn timer
@@ -25,7 +25,7 @@ public class RespawnScript : MonoBehaviour
     }
 
     void Update()
-    {
+    { 
         timer += Time.deltaTime; //timing here
         //Debug.Log(timer);
         if (timer >= spawnTime)
@@ -56,6 +56,7 @@ public class RespawnScript : MonoBehaviour
 		Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + enemy.transform.localScale.y/2.0f, transform.position.z);
         GameObject Enemy = Instantiate(enemy, spawnPosition, transform.rotation); //enemy spawned here
         numOfEnemy++;
+  
         //Debug.Log(numOfEnemy);
     }
 }

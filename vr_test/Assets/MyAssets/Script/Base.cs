@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Base : MonoBehaviour
 {
-	private static float hp = 0;
-	private static int numEnemiesLeft = 0;
+    public static float hp = 0;
+	public static int numEnemiesLeft = 0;
+    
 	//UI text for win
 	//UI text for lose
 	//UI for hp
@@ -14,7 +16,7 @@ public class Base : MonoBehaviour
 
 	private void Awake()
 	{
-		if (hp != 0)// only 1 base can exist in hierarchy
+        if (hp != 0)// only 1 base can exist in hierarchy
 		{
 			Destroy(gameObject);
 			return;
@@ -25,29 +27,10 @@ public class Base : MonoBehaviour
 			gameObject.name = "Base";
 		}
 	}
-
-	private void Start()
-    {
-		//*/ assigning temp value
-		//numEnemiesLeft = 10;
-		/*/
-		numEnemiesLeft = Spawner.NumTotalEnemy;
-		//*/
-    }
     public static void SetTotalNumEnemy(int num)
     {
         numEnemiesLeft = num;
     }
-	private void Win()
-	{
-		//Display Win text
-		Debug.Log("Win");
-	}
-	private void Lose()
-	{
-		// Display Lose text
-		Debug.Log("Lose");
-	}
 
 	// Called when enemy is attacking
 	public static void TakeDamage(float amt)
@@ -57,7 +40,7 @@ public class Base : MonoBehaviour
 		//Update Health bar
 		if (hp == 0)
 		{
-			GameObject.Find("Base").GetComponent<Base>().Lose();
+			//ameObject.Find("Base").GetComponent<Base>().Lose();
 		}
 	}
 
@@ -65,11 +48,11 @@ public class Base : MonoBehaviour
 	public static void ReduceNumEnemy()
 	{
 		numEnemiesLeft--;
-		//Debug.Log(numEnemiesLeft);
-		//Update indicator
-		if (numEnemiesLeft == 0)
+        //Debug.Log(numEnemiesLeft);
+        //Update indicator
+        if (numEnemiesLeft == 0)
 		{
-			GameObject.Find("Base").GetComponent<Base>().Win();
+			//GameObject.Find("Base").GetComponent<Base>().Win();
 		}
 	}
 

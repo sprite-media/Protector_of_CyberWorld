@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.vr_test.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "E:\\학교\\VR\\vr_test\\actions.json",
+      "action_manifest_path": "E:\\Github\\protector_of_cyberworld\\vr_test\\actions.json",
       "strings": {
         "en_us": {
           "name": "vr_test [Testing]"
