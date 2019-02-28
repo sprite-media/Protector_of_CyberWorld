@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Base : MonoBehaviour
+public class Base : PlayerBuilding
 {
-    public static float hp = 0;
-	public static int numEnemiesLeft = 0;
-    
+	public static Base BASE { get { return GameObject.Find("Base").GetComponent<Base>(); } }
+	private static int numEnemiesLeft = 0;
 	//UI text for win
 	//UI text for lose
 	//UI for hp
@@ -27,23 +26,18 @@ public class Base : MonoBehaviour
 			gameObject.name = "Base";
 		}
 	}
-    public static void SetTotalNumEnemy(int num)
-    {
-        numEnemiesLeft = num;
-    }
 
 	// Called when enemy is attacking
-	public static void TakeDamage(float amt)
+	public override void TakeDamage(float amt)
 	{
-		hp = Mathf.Clamp(hp - amt, 0, hp);
+		base.TakeDamage(amt);
 		Debug.Log(hp);
-		//Update Health bar
-		if (hp == 0)
-		{
-			//ameObject.Find("Base").GetComponent<Base>().Lose();
-		}
 	}
 
+	public static void SetTotalNumEnemy(int num)
+	{
+		numEnemiesLeft = num;
+	}
 	// Called when an enemy is dead
 	public static void ReduceNumEnemy()
 	{
@@ -55,23 +49,4 @@ public class Base : MonoBehaviour
 			//GameObject.Find("Base").GetComponent<Base>().Win();
 		}
 	}
-
-
-	/*	For Test
-	private float testTimer = 1.0f;
-	private float testCounter = 0.0f;
-	private void Update()
-	{
-		testCounter += Time.deltaTime;
-		if (testCounter >= testTimer)
-		{
-			testCounter = 0.0f;
-			
-			//TakeDamage(1.0f);
-			
-			//ReduceNumEnemy();
-			
-		}
-	}
-	//*/
 }

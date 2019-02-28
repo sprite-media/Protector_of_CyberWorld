@@ -11,7 +11,6 @@ public class MapGenerator : MonoBehaviour
 	public static int X { get { return x; } }
 	private static int z;
 	public static int Z { get { return z; } }
-	
 
 	private void Awake()
 	{
@@ -23,7 +22,7 @@ public class MapGenerator : MonoBehaviour
 			tile[2] = tile[1];
 
 			tile[3] = Resources.Load("LaserTower", typeof(GameObject)) as GameObject;
-			/*
+			//*
 			  tile[4] = Resources.Load("Trap", typeof(GameObject)) as GameObject;
 			//*/
 			tile[5] = Resources.Load("Spawner", typeof(GameObject)) as GameObject;
@@ -44,11 +43,13 @@ public class MapGenerator : MonoBehaviour
 		TextAsset mapCSV = Resources.Load("MapData", typeof(TextAsset)) as TextAsset;
 		string[] column = mapCSV.text.Split('\n');
 		string[] row = column[0].Split(',');
-			mapData = new int[column.Length,row.Length];
+		mapData = new int[column.Length,row.Length];
 		x = column.Length;
 		z = row.Length;
-		GameObject temp = null;
 
+		
+
+		GameObject temp = null;
 		// convert map data text into int and generate map
 		for (int i = 0; i < x; i++)
 		{
@@ -56,6 +57,7 @@ public class MapGenerator : MonoBehaviour
 			for (int j = 0; j < z; j++)
 			{
 				mapData[i, j] = int.Parse(row[j]);
+
 				temp = (GameObject)Instantiate(tile[mapData[i, j]], new Vector3(i, 0, j), tile[mapData[i, j]].transform.rotation);
 				temp.transform.parent = transform;
 
@@ -89,8 +91,8 @@ public class MapGenerator : MonoBehaviour
 					}
 					case 4://Trap
 					{
-						/*Transform adjustment if needed
-						temp.transform.position = new Vector3(temp.transform.position.x, VALUE YOU WANT, temp.transform.position.z);
+						//*Transform adjustment if needed
+						temp.transform.position = new Vector3(temp.transform.position.x, 0.65f, temp.transform.position.z);
 						//*/
 
 						// Create enemy path under the trap and change the map data to enemy path
@@ -109,10 +111,9 @@ public class MapGenerator : MonoBehaviour
 						//*/
 						break;
 					}
-				}
-				//temp = null;
-			}
-		}
+				}// end of switch
+			}// end of row
+		}// end of column
 	}
 
 

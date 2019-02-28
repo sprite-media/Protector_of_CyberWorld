@@ -30,7 +30,7 @@ public class LaserTower : Tower
         laser.enabled = true;
         laser.SetPosition(0, firePoint.position);
         laser.SetPosition(1, target.position);
-        target.GetComponent<Virus1>().TakeDamage(3);
+        target.GetComponent<Enemy>().TakeDamage(weaponDmg);
         StartCoroutine("TurnOffLaser");
     }
 
@@ -48,15 +48,14 @@ public class LaserTower : Tower
         {
             Shoot();
             fireCountdown = 0.0f;
-          
         }
 
         fireCountdown += Time.deltaTime;
     }
 
-    public override void TakeDamage(int _dmg)
+    public override void TakeDamage(float amt)
     {
-        hp -= _dmg;
+        hp -= amt;
         if (hp <= 0)
         {
             //Effect for disappearing tower

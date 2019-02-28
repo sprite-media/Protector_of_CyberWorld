@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 2119605753205551940}
   m_Layer: 0
   m_Name: LaserTower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 5
-  weaponDmg: 1
+  weaponDmg: 0.01
   fireRate: 0
   fireCountdown: 0
   enemyTag: Enemy
@@ -495,11 +495,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5063832535631357270}
     m_Modifications:
-    - target: {fileID: 977284357979858068, guid: d815a5bc4148cd7479aff0a8a7e1a3b0,
-        type: 3}
-      propertyPath: m_Name
-      value: Firepoint
-      objectReference: {fileID: 0}
     - target: {fileID: 1285626173856872065, guid: d815a5bc4148cd7479aff0a8a7e1a3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -564,6 +559,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.2000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 977284357979858068, guid: d815a5bc4148cd7479aff0a8a7e1a3b0,
+        type: 3}
+      propertyPath: m_Name
+      value: Firepoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d815a5bc4148cd7479aff0a8a7e1a3b0, type: 3}

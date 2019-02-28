@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public abstract class Tower : MonoBehaviour
+public abstract class Tower : PlayerBuilding
 {
-    public float hp;
-
     protected Transform target;
 
     public float range = 5.0f;
@@ -23,8 +21,6 @@ public abstract class Tower : MonoBehaviour
     abstract public void Shoot();
     abstract public void OnDrawGizmosSelected();
     abstract public void PreparedToShoot();
-    abstract public void TakeDamage(int _dmg);
-    abstract public void Death();
 
     // Start is called before the first frame update
     protected void Start()
@@ -75,5 +71,11 @@ public abstract class Tower : MonoBehaviour
             target = null;
         }
     }
+	public override void Death()
+	{
+		base.Death();
+		Debug.Log(gameObject.name + " Destroyed.");
+		Destroy(gameObject);
+	}
 
 }
