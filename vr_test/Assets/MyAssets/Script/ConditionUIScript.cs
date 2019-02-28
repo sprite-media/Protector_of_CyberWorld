@@ -14,7 +14,7 @@ public class ConditionUIScript : MonoBehaviour
         {
             Win();
         }
-        if(Base.hp <= 0.0f)
+        if(Base.HP <= 0.0f)
         {
             Lose();
         }

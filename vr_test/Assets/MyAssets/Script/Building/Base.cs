@@ -6,7 +6,9 @@ using UnityEngine;
 public class Base : PlayerBuilding
 {
 	public static Base BASE { get { return GameObject.Find("Base").GetComponent<Base>(); } }
-	private static int numEnemiesLeft = 0;
+    public static float HP { get { return GameObject.Find("Base").GetComponent<Base>().hp; } }
+	public static int numEnemiesLeft = 0;
+    
 	//UI text for win
 	//UI text for lose
 	//UI for hp
