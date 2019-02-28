@@ -53,9 +53,9 @@ public class LaserTower : Tower
         fireCountdown += Time.deltaTime;
     }
 
-    public override void TakeDamage(int _dmg)
+    public override void TakeDamage(float amt)
     {
-        hp -= _dmg;
+        hp -= amt;
         if (hp <= 0)
         {
             //Effect for disappearing tower
