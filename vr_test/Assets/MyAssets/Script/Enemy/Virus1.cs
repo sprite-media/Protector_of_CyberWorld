@@ -8,4 +8,10 @@ public class Virus1 : Enemy
 		hp = 3.0f;
 		power = 1.0f;
 	}
+
+	protected new void Start()
+	{
+		base.Start();
+		priority = new int[]{ 1, 0 };
+	}
 }

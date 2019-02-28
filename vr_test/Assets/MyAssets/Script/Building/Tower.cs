@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public abstract class Tower : MonoBehaviour
+public abstract class Tower : PlayerBuilding
 {
     protected Transform target;
 
@@ -73,5 +73,11 @@ public abstract class Tower : MonoBehaviour
             target = null;
         }
     }
+	public override void Death()
+	{
+		base.Death();
+		Debug.Log(gameObject.name + " Destroyed.");
+		Destroy(gameObject);
+	}
 
 }
