@@ -3,6 +3,8 @@ using UnityEngine;
 
 public abstract class Tower : MonoBehaviour
 {
+    public float hp;
+
     protected Transform target;
 
     public float range = 5.0f;
@@ -16,7 +18,13 @@ public abstract class Tower : MonoBehaviour
     protected Transform partToRatate;
     protected Transform firePoint;
 
-    public float turnSpeed = 10f;    
+    public float turnSpeed = 10f;
+
+    abstract public void Shoot();
+    abstract public void OnDrawGizmosSelected();
+    abstract public void PreparedToShoot();
+    abstract public void TakeDamage(int _dmg);
+    abstract public void Death();
 
     // Start is called before the first frame update
     protected void Start()
@@ -26,7 +34,7 @@ public abstract class Tower : MonoBehaviour
         firePoint = transform.Find("PartRotation").Find("Sphere").Find("Firepoint");
     }
 
-        // Update is called once per frame
+    // Update is called once per frame
     public void Update()
     {
         UpdateTarget();
@@ -41,11 +49,6 @@ public abstract class Tower : MonoBehaviour
 
         PreparedToShoot();
     }
-
-    abstract public void Shoot();
-    abstract public void OnDrawGizmosSelected();
-    abstract public void PreparedToShoot();
-
 
     public void UpdateTarget()
     {
@@ -65,7 +68,6 @@ public abstract class Tower : MonoBehaviour
 
         if (nearestEnemy != null && shortestDistance <= range)
         {
-            //Debug.Log("Rotation");
             target = nearestEnemy.transform;
         }
         else

@@ -7,10 +7,13 @@ public class LaserTower : Tower
     private float dist;
     public float lineDrawSpeed = 6.0f;
     public float lineCool = 1.0f;
+
     // Start is called before the first frame update
     new void Start()
     {
         base.Start();
+
+        hp = 3.0f;
         laser = transform.Find("Laser").GetComponent<LineRenderer>();        
         fireRate = 0.5f;
     }
@@ -37,6 +40,8 @@ public class LaserTower : Tower
         laser.enabled = false;
     }
 
+
+
     public override void PreparedToShoot()
     {
         if (fireCountdown >= fireRate)
@@ -48,6 +53,28 @@ public class LaserTower : Tower
 
         fireCountdown += Time.deltaTime;
     }
+
+    public override void TakeDamage(int _dmg)
+    {
+        hp -= _dmg;
+        if (hp <= 0)
+        {
+            //Effect for disappearing tower
+            //Instantiate effect.........
+            StartCoroutine("waitForDeath");
+        }
+    }
+    IEnumerator waitForDeath()
+    {
+        yield return new WaitForSeconds(0.2f);
+        Death();
+    }
+
+    public override void Death()
+    {
+        Destroy(gameObject);
+    }
+
 
     public override void OnDrawGizmosSelected()
     {
