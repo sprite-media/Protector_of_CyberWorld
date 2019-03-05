@@ -29,6 +29,7 @@ public abstract class Enemy : MonoBehaviour
 	protected int[] priority = null; // if priority starts from -1, it attacks all buildings
 	private int priorityIndex = 0;
 
+	private GameObject particle = null;
 
 	protected float hp = 0;
 	protected float power = 0.0f;
@@ -41,6 +42,10 @@ public abstract class Enemy : MonoBehaviour
 		pathType = transform.position.x == PathFinding.Path[0][0].x ? 0 : 1;
 		priority = new int[2];
 		priorityIndex = 0;
+
+		particle = transform.Find("Particle_EnemyDeath").gameObject;
+		particle.SetActive(false);
+
 		if (TargetList == null)
 		{
 			TargetList = new PlayerBuilding[2][];
@@ -227,7 +232,9 @@ public abstract class Enemy : MonoBehaviour
 	public virtual void Death()
 	{
 		Base.ReduceNumEnemy();
-		//Show Effect
+		particle.SetActive(true);
+		particle.transform.parent = null;
+		Destroy(particle, 3);
 		Destroy(gameObject);
 	}
 

@@ -18,10 +18,10 @@ namespace Hyukin
         {
             timer += Time.deltaTime;
 
-            //if (Input.GetButton("Fire1") && timer >= reFireTime) //for now
-            //{
-            //    Shoot();
-            //}
+            if (Input.GetButton("Fire1") && timer >= reFireTime) //for now
+            {
+                Shoot();
+            }
             if (hand != null && hand.grabPinchAction.GetStateDown(hand.handType))
             {
                 Shoot();

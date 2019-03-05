@@ -8,10 +8,14 @@ namespace Hyukin
         public float effectsDisplayTime = 0.2f; // how long lineRenderer will stay in a scene
         int shootableMask; //enemy or should be shootable
 
+		private static GameObject particle = null;
+
         private void Start()
         {
             gunLine = GetComponent<LineRenderer>();
-        }
+			if(particle == null)
+				particle = Resources.Load("Particle_LaserHit", typeof(GameObject)) as GameObject;
+		}
 
         public override void Update()
         {
@@ -39,19 +43,27 @@ namespace Hyukin
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, range))
             {
-
+				Debug.Log("Hit");
                 gunLine.SetPosition(1, hit.point);
-             
-                if (hit.transform.tag == "Enemy")
+				InstantiateParticle(hit);
+
+				if (hit.transform.tag == "Enemy")
                 {
-                    //Debug.Log("takeDDDD");
-                    hit.transform.GetComponent<Virus1>().TakeDamage(damage);
-                }
+                    hit.transform.GetComponent<Enemy>().TakeDamage(damage);
+				}
             }
             else
             {
                 gunLine.SetPosition(1, shotTransform.position + shotTransform.forward * range);
             }
         }
+
+		private void InstantiateParticle(RaycastHit hit)
+		{
+			GameObject tempParticle = (GameObject)Instantiate(particle, hit.point, hit.transform.rotation);
+			tempParticle.transform.LookAt(transform, Vector3.up);
+			tempParticle.SetActive(true);
+			Destroy(tempParticle, 1.4f);
+		}
     }
 }
