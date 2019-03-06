@@ -43,7 +43,6 @@ namespace Hyukin
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, range))
             {
-				Debug.Log("Hit");
                 gunLine.SetPosition(1, hit.point);
 				InstantiateParticle(hit);
 
