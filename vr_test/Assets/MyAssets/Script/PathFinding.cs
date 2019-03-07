@@ -1,105 +1,139 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PathFinding : MonoBehaviour
 {
-	private Vector3[] path = null;
-    private Vector3[] path1 = null;
-	private Vector3[] path2 = null;
-
-    private int tileCnt = 0;
     private int numOfTile1 = 0, numOfTile2 = 0;
-    private int midLane;
 
-	private static Vector3[][] totalPath = null;
-	public static Vector3[][] Path { get { return totalPath; } }
+	private static Vector3[][] path = null;
+	public static Vector3[][] Path { get { return path; } }
+
+    [SerializeField] Vector3[] path1;
+    [SerializeField] Vector3[] path2;
 
     void Start()
     {
-		//Finding mid point
-        for (int i = 0; i < MapGenerator.X; i++)
+        InitPath();
+        Pathfinding(0);
+        Pathfinding(1);
+        path1 = new Vector3[numOfTile1];
+        for (int i = 0; i < numOfTile1; i++)
         {
-            for (int j = 0; j < MapGenerator.Z; j++)
-            {
-                if (j == 0 && MapGenerator.GetTileType(i, j) == 1)
-                {
-                    midLane = i;
-                }
-            }
+            path1[i] = path[0][i];
         }
 
-        // Calculating total path size and create array
-        int pathSize = MapGenerator.Z * MapGenerator.X;
-        path = new Vector3[pathSize];
-
-        Pathfinding1();
-		Pathfinding2();
-
-		totalPath = new Vector3[2][];
-		totalPath[0] = new Vector3[numOfTile1];
-		totalPath[1] = new Vector3[numOfTile2];
-		for (int i = 0; i < numOfTile1; i++)
-		{
-			totalPath[0][i] = path1[i];
-		}
-		for (int i = 0; i < numOfTile2; i++)
-		{
-			totalPath[1][i] = path2[i];
-		}
-	}
-
-
-
-    void Pathfinding1()
-    {
-        for (int i = 0; i < midLane + 1; i++)
+        path2 = new Vector3[numOfTile2];
+        for (int i = 0; i < numOfTile2; i++)
         {
-            for (int j = MapGenerator.Z - 1; j >= 0; j--)
+            path2[i] = path[1][i];
+        }
+    }
+
+    void InitPath()
+    {
+        for (int i = 0; i < MapGenerator.X; i++)
+        {
+            for (int j =0; j < MapGenerator.Z; j++)
             {
                 if (MapGenerator.GetTileType(i, j) == 1)
                 {
-                    path[tileCnt] = new Vector3(i, 0, j);
-                    tileCnt++;
+                    numOfTile1++;
                 }
+                else if (MapGenerator.GetTileType(i, j) == 2)
+                {
+                    numOfTile2++;
+                }
+            }
+        }
+        path = new Vector3[2][];
+        path[0] = new Vector3[numOfTile1];
+        path[1] = new Vector3[numOfTile2];
 
+        
+    }
+
+    void Pathfinding(int pathType)
+    {
+        int pathID = pathType == 0 ? 1 : 2;
+        int pathCount = 0;
+        Vector3 startPoint;
+        for (int i = 0; i < MapGenerator.X; i++)
+        {
+            if (MapGenerator.GetTileType(i, 0) == pathID)
+            {
+                
+                startPoint = new Vector3(i, 0, 0);
+                path[pathType][0] = startPoint;
+                
             }
         }
 
-        numOfTile1 = tileCnt;
-		tileCnt = 0;
-        path1 = new Vector3[numOfTile1];
+        for (int i = 0; i < path[pathType].Length; i++)
+        {
+            Vector3 current = path[pathType][pathCount];
+            //up
+            if (MapGenerator.GetTileType(current.x - 1, current.z) == pathID)
+            {
+                if (!isExisting(pathType, new Vector3(current.x - 1, 0, current.z)))
+                {
+                    pathCount++;
+                    path[pathType][pathCount] = new Vector3(current.x - 1, 0, current.z);
+                }
+            }
+      
+            //down
+            if(current.x != 0)
+            {
+                if (MapGenerator.GetTileType(current.x + 1, current.z) == pathID)
+                {
+                    if (!isExisting(pathType, new Vector3(current.x + 1, 0, current.z)))
+                    {
+                        pathCount++;
+                        path[pathType][pathCount] = new Vector3(current.x + 1, 0, current.z);
+                    }
+                }
+            }
+         
+            //left
+            if(current.z != 0)
+            {
+                if (MapGenerator.GetTileType(current.x, current.z - 1) == pathID)
+                {
+                    if (!isExisting(pathType, new Vector3(current.x, 0, current.z - 1)))
+                    {
+                        pathCount++;
+                        path[pathType][pathCount] = new Vector3(current.x, 0,current.z - 1);
+                    }
+                }
+            }          
+            
+            //right
+            if (MapGenerator.GetTileType(current.x, current.z + 1) == pathID)
+            {
+                if (!isExisting(pathType, new Vector3(current.x, 0, current.z + 1)))
+                {
+                    pathCount++;
+                    path[pathType][pathCount] = new Vector3(current.x, 0, current.z + 1);
+                }
+            }
+        }
+        Array.Reverse(path[pathType], 0, path[pathType].Length);
 
-
-        for (int i = 0; i < numOfTile1; i++) {
-            path1[i] = path[i];
-        } 
     }
 
-	void Pathfinding2()
-	{
-		for (int i = MapGenerator.X - 1; i > midLane; i--)
-		{
-			for (int j = MapGenerator.Z - 1; j >= 0; j--)
-			{
-				if (MapGenerator.GetTileType(i, j) == 2)
-				{
-					path[tileCnt] = new Vector3(i, 0, j);
-					tileCnt++;
-				}
-			}
-		}
-
-		numOfTile2 = tileCnt;
-		path2 = new Vector3[numOfTile2];
-		tileCnt = 0;
-
-
-		for (int i = 0; i < numOfTile2; i++) {
-			path2[i] = path[i];
-		}
-	}
-
+    bool isExisting(int _pathType, Vector3 _pos)
+    {
+        for (int i = 0; i < path[_pathType].Length; i++)
+        {
+            if (path[_pathType][i] == _pos)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 
