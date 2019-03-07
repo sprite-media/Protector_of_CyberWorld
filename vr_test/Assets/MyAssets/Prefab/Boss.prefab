@@ -100,7 +100,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 212286200}
-  - component: {fileID: 212286201}
   m_Layer: 0
   m_Name: RigLArm1Gizmo
   m_TagString: Untagged
@@ -122,19 +121,6 @@ Transform:
   m_Father: {fileID: 1097663674}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &212286201
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212286199}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.2, z: 0.2}
-  m_Center: {x: -0.34, y: 0, z: 0}
 --- !u!1 &219044200
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +191,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 319572340}
-  - component: {fileID: 319572341}
   m_Layer: 0
   m_Name: RigRArmPalmGizmo
   m_TagString: Untagged
@@ -227,19 +212,6 @@ Transform:
   m_Father: {fileID: 1097663674}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &319572341
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 319572339}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3
-  m_Center: {x: -0.24, y: 0, z: 0}
 --- !u!1 &353709970
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,7 +512,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 754934821}
-  - component: {fileID: 754934822}
   m_Layer: 0
   m_Name: RigRArm1Gizmo
   m_TagString: Untagged
@@ -562,19 +533,6 @@ Transform:
   m_Father: {fileID: 1097663674}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &754934822
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754934820}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.2, z: 0.2}
-  m_Center: {x: -0.34, y: 0, z: 0}
 --- !u!1 &755594788
 GameObject:
   m_ObjectHideFlags: 0
@@ -933,8 +891,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097663671}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 4.43, y: -2, z: 39.13}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 10, y: 0, z: 49}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_Children:
   - {fileID: 794752165}
   - {fileID: 1583148951}
@@ -958,6 +916,7 @@ Transform:
   - {fileID: 219044201}
   - {fileID: 1508809131}
   - {fileID: 787525698}
+  - {fileID: 1645448839438157212}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -988,11 +947,11 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097663671}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.35
-  m_Center: {x: 0, y: 1.5, z: 0.14}
+  m_Radius: 0.32
+  m_Center: {x: 0, y: 1.5, z: 0.12}
 --- !u!114 &1097663672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1005,15 +964,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99c6ecae828334d46970c4ba94046e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 20
-  dmg: 5
   maxSpeed: 10
   minSpeed: 3
-  incrementSpeed: 0.2
-  slowingDistance: 3
-  stoppingDistance: 1.5
+  incrementSpeed: 0.1
+  slowingDistance: 20
+  stoppingDistance: 10
   curSpeed: 0
-  rotateSpeed: 180
+  rotateSpeed: 90
   curState: 0
   curTarget: {fileID: 0}
   targetList: []
@@ -1730,7 +1687,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1853923463}
-  - component: {fileID: 1853923464}
   m_Layer: 0
   m_Name: RigLArmPalmGizmo
   m_TagString: Untagged
@@ -1752,19 +1708,6 @@ Transform:
   m_Father: {fileID: 1097663674}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1853923464
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1853923462}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3
-  m_Center: {x: -0.24, y: 0, z: 0}
 --- !u!1 &1894758099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1947,4 +1890,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1097663674}
   m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1645448839438157215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1645448839438157212}
+  m_Layer: 0
+  m_Name: Aim
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1645448839438157212
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645448839438157215}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.529, z: 0.164}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1097663674}
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

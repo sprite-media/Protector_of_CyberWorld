@@ -18,6 +18,7 @@ public class Boss : Enemy
     [SerializeField] float stoppingDistance = 1.0f;
     [SerializeField] float curSpeed         = 0.0f;
     [SerializeField] float rotateSpeed      = 10.0f;
+    [SerializeField] GameObject aim;
     #endregion
 
     #region State related variables and Enum
@@ -157,7 +158,6 @@ public class Boss : Enemy
     private void GetHit()
     {
         animator.SetBool("Take Damage", true);
-        Debug.Log("ahh");
     }
     public void BackToIdleFromHiState(AnimationEvent animationEvent)
     {
@@ -182,14 +182,16 @@ public class Boss : Enemy
     }
     public void DeadAnimationEventHandler(AnimationEvent animationEvent)
     {
-        Debug.Log("woola");
         Destroy(gameObject, 2.0f);
+    }
+    public void AimableDelayEventHandler(AnimationEvent animationEvent)
+    {
+        aim.SetActive(true);
     }
 
     public override void TakeDamage(float dmg)
     {
         base.TakeDamage(dmg);
-        Debug.Log("boss hp : " + hp);
         if (Random.Range(0, 100) == 1) 
             curState = STATE.HIT;
     }
