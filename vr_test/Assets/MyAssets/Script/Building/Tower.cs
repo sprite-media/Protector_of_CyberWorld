@@ -40,9 +40,6 @@ public class Tower : PlayerBuilding
     // Update is called once per frame
     public void Update()
     {
-
-			UpdateTarget();
-
 			if (target == null)
 				return;
 
@@ -50,7 +47,6 @@ public class Tower : PlayerBuilding
 			Quaternion lookRotation = Quaternion.LookRotation(dir);
 			Vector3 rotation = Quaternion.Lerp(partToRatate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
 			partToRatate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
-		
     }
 	public virtual void Shoot()
 	{
@@ -69,11 +65,10 @@ public class Tower : PlayerBuilding
 	}
 	public void UpdateTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
-        foreach (GameObject enemy in enemies)
+        foreach (GameObject enemy in EnemyContainer.Enemies)
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             if (distanceToEnemy < shortestDistance)

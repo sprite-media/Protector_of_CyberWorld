@@ -12,6 +12,6 @@ public class Virus1 : Enemy
 	protected new void Start()
 	{
 		base.Start();
-		priority = new int[]{ 1, 0 };
+		priority = new int[]{ -1, 0 };
 	}
 }

@@ -5,6 +5,7 @@ public class Virus2 : Enemy
 	private static GameObject virus3 = null;
 	[SerializeField]
 	private Transform target = null;
+	private float virusDetectRange;
 
 	private new void Awake()
 	{
@@ -12,15 +13,22 @@ public class Virus2 : Enemy
 		hp = 3.0f;
 		power = 1.0f;
 		speed = 5.0f;
+		virusDetectRange = 6.0f;
 		if (virus3 == null)
 		{
-			virus3 = Resources.Load("Virus3", typeof(GameObject)) as GameObject;
+			virus3 = Resources.Load("V3", typeof(GameObject)) as GameObject;
 		}
 	}
 	protected new void Start()
 	{
 		base.Start();
 		priority = new int[] { 1, 0 };
+	}
+	public override void Update()
+	{
+		base.Update();
+		if(target == null)
+			HasVirus();
 	}
 	public override void DetectTarget()
 	{
@@ -46,12 +54,22 @@ public class Virus2 : Enemy
 			}
 		}
 	}
-	private void OnTriggerEnter(Collider col)
+	private void HasVirus()
 	{
-		if (col.GetComponent<Virus1>() != null)
+		foreach(GameObject g in EnemyContainer.Enemies)
 		{
-			target = col.transform;
-			currentState = State.InRange;
+			if (g != null)
+			{
+				Enemy e = g.GetComponent<Enemy>();
+				if (e is Virus1)
+				{
+					if (Vector3.Distance(transform.position, e.transform.position) < virusDetectRange)
+					{
+						target = e.transform;
+						currentState = State.InRange;
+					}
+				}
+			}
 		}
 	}
 }
