@@ -35,7 +35,7 @@ public class Boss : MonoBehaviour
         {
             targetList[i].GetComponent<PlayerBuilding>().number = i;
 
-            Debug.Log("name:" + targetList[i].name);
+            //Debug.Log("name:" + targetList[i].name);
 
         }
     }
@@ -43,7 +43,7 @@ public class Boss : MonoBehaviour
     public void UpdateTargetList(int indexToRemove)
     {
         targetList.RemoveAt(indexToRemove);
-        Debug.Log("targetList length: " + targetList.Count);
+        //Debug.Log("targetList length: " + targetList.Count);
         PickTheTarget();
     }
 

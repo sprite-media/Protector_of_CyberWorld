@@ -90,7 +90,7 @@ public class Tower : PlayerBuilding
 	public override void Death()
 	{
 		base.Death();
-		Debug.Log(gameObject.name + " Destroyed.");
+		//Debug.Log(gameObject.name + " Destroyed.");
 		Destroy(gameObject);
 	}
 
