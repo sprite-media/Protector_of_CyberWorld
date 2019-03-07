@@ -5,6 +5,8 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
     int count = 0;
+    int turretIndex = 0; //for name
+
 	private static int[,] mapData = null;
 	private GameObject[] tile = null;
 	private GameObject playerBase = null;
@@ -92,6 +94,7 @@ public class MapGenerator : MonoBehaviour
 
                         Boss.Instance.targetList.Add(temp);
                         temp.GetComponent<PlayerBuilding>().number = count++;
+                        temp.gameObject.name = "turret_" + turretIndex++;
                         break;
 					}
 					case 4://Trap
@@ -130,7 +133,8 @@ public class MapGenerator : MonoBehaviour
 
                         Boss.Instance.targetList.Add(temp);
                         temp.GetComponent<PlayerBuilding>().number = count++;
-                        break;
+                        temp.gameObject.name = "turret_" + turretIndex++;
+                            break;
 					}
 				}// end of switch
 			}// end of row

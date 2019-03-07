@@ -96,7 +96,7 @@ public abstract class Enemy : MonoBehaviour
 				break;
 			default:
 				Debug.LogError(gameObject.name + " state error. \n Destroying the gameObejct");
-				Base.ReduceNumEnemy();
+				Base.Instance.ReduceNumEnemy();
 				Destroy(gameObject);
 				break;
 		}
@@ -206,7 +206,7 @@ public abstract class Enemy : MonoBehaviour
 			pathIndex++;
 			if (pathIndex >= PathFinding.Path[pathType].Length)
 			{
-				UpdateTargetBuilding(Base.BASE);
+				UpdateTargetBuilding(Base.Instance.BASE);
 			}
 			else
 			{
@@ -228,7 +228,7 @@ public abstract class Enemy : MonoBehaviour
 
 	public virtual void Death()
 	{
-		Base.ReduceNumEnemy();
+        Base.Instance.ReduceNumEnemy();
 		particle.SetActive(true);
 		particle.transform.parent = null;
 		Destroy(particle, 3);

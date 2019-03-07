@@ -8,7 +8,7 @@ public class RespawnScript : MonoBehaviour
 	private int enemyType = 0;
 
 	private int maxEnmey; //max number of enemies per spawner
-	private int[] maxVirus = { 30, 20 };
+	private int[] maxVirus = { 0, 1 };
 	private int numOfEnemy = 0; // number of spawned enemies
     public float minSpawnTime = 5.0f;
     public float maxSpawnTime = 10.0f;
@@ -26,7 +26,7 @@ public class RespawnScript : MonoBehaviour
 	void Start()
     {
         RandomTime(); //set a spawn timer
-        Base.SetTotalNumEnemy(maxEnmey * 2);
+        Base.Instance.SetTotalNumEnemy(maxEnmey * 2 + 1); // +1 for boss
     }
 
     void Update()

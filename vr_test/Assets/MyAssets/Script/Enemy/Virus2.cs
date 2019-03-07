@@ -46,7 +46,8 @@ public class Virus2 : Enemy
 			transform.Translate(Vector3.forward * speed * Time.deltaTime);
 			if (Vector3.Distance(transform.position, target.position) < 1.0f)
 			{
-				GameObject temp = (GameObject)Instantiate(virus3, transform.position, transform.rotation);
+                Base.Instance.DereaseTheEnemyNum();
+                GameObject temp = (GameObject)Instantiate(virus3, transform.position, transform.rotation);
 				temp.GetComponent<Virus3>().PathType = this.pathType;
 				temp.GetComponent<Virus3>().BackToPath();
 				Destroy(target.gameObject);

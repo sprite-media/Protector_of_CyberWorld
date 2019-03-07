@@ -20,8 +20,6 @@ public class Tower : PlayerBuilding
 
     public float range = 5.0f;
 
-    public string enemyTag = "Enemy";
-
     protected Transform partToRatate;
 
     public float turnSpeed = 10f;
@@ -30,7 +28,7 @@ public class Tower : PlayerBuilding
     // Start is called before the first frame update
     protected void Start()
     {
-		hp = 10.0f;
+		hp = 20.0f;
 		InvokeRepeating("UpdateTarget", 0f, 0.5f); // Inorder to not to call UpdateTarget function in every frame.
         partToRatate = transform.Find("Base");
         //firePoint = transform.Find("PartRotation").Find("Sphere").Find("Firepoint");
@@ -68,14 +66,23 @@ public class Tower : PlayerBuilding
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
-        foreach (GameObject enemy in EnemyContainer.Enemies)
+        if (Base.Instance.GetTotalNumEnemy() > 1)
         {
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < shortestDistance)
+            foreach (GameObject enemy in EnemyContainer.Enemies)
             {
-                shortestDistance = distanceToEnemy;
-                nearestEnemy = enemy;
+                float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+                if (distanceToEnemy < shortestDistance)
+                {
+                    shortestDistance = distanceToEnemy;
+                    nearestEnemy = enemy;
+                }
             }
+        }
+        else if(Base.Instance.GetTotalNumEnemy() == 1)//added but somehow turrent can't shoot against the boss.
+        {
+            Debug.Log("Boss kill ready");
+            nearestEnemy = Boss.Instance.gameObject;
+            range *= 1.5f;
         }
 
         if (nearestEnemy != null && shortestDistance <= range)

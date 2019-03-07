@@ -38,8 +38,7 @@ namespace Hyukin
             gunLine.enabled = true;
             Transform shotTransform = transform; 
             gunLine.SetPosition(0, shotTransform.position);
-            
-
+           
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, range))
             {
@@ -50,6 +49,10 @@ namespace Hyukin
                 {
                     hit.transform.GetComponent<Enemy>().TakeDamage(damage);
 				}
+                else if(hit.transform.tag == "Boss")
+                {
+                    hit.transform.GetComponent<Boss>().TakeDamage(damage);
+                }
             }
             else
             {

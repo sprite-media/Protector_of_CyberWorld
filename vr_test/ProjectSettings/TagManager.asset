@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Tower
   - Trap
+  - Enemy
+  - Base
+  - projectile
+  - FxTemporaire
+  - Boss
   layers:
   - Default
   - TransparentFX
