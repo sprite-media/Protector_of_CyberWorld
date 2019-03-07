@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Virus2 : Enemy
+public class Virus2 : Virus
 {
 	private static GameObject virus3 = null;
 	[SerializeField]
@@ -11,7 +11,7 @@ public class Virus2 : Enemy
 	{
 		base.Awake();
 		hp = 3.0f;
-		power = 1.0f;
+        damage = 1.0f;
 		speed = 5.0f;
 		virusDetectRange = 6.0f;
 		if (virus3 == null)

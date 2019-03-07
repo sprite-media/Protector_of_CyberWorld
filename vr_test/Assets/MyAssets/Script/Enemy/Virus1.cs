@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class Virus1 : Enemy
+public class Virus1 : Virus
 {
 	private new void Awake()
 	{
 		base.Awake();
 		hp = 3.0f;
-		power = 1.0f;
+        damage = 1.0f;
 	}
 
 	protected new void Start()

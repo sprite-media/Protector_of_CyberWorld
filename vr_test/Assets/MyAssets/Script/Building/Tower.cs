@@ -50,6 +50,11 @@ public class Tower : PlayerBuilding
 			partToRatate.rotation = Quaternion.Euler(rotation.x, rotation.y, 0f);
         else
             partToRatate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+
+        if (Base.Instance.GetTotalNumEnemy() <= 0)
+        {
+            target = null;
+        }
     }
 	public virtual void Shoot()
 	{
@@ -71,24 +76,22 @@ public class Tower : PlayerBuilding
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
-        if (Base.Instance.GetTotalNumEnemy() > 1)
+
+        foreach (GameObject enemy in EnemyContainer.Enemies)
         {
-            foreach (GameObject enemy in EnemyContainer.Enemies)
+            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distanceToEnemy < shortestDistance)
             {
-                float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-                if (distanceToEnemy < shortestDistance)
-                {
-                    shortestDistance = distanceToEnemy;
-                    nearestEnemy = enemy;
-                }
+                shortestDistance = distanceToEnemy;
+                nearestEnemy = enemy;
             }
         }
-        else if(Base.Instance.GetTotalNumEnemy() == 1)//added but somehow turrent can't shoot against the boss.
+
+        if (Base.Instance.GetTotalNumEnemy() == 1)
         {
-            Debug.Log("Boss kill ready");
-            nearestEnemy = Boss.Instance.gameObject;
-            range *= 1.5f;
+            range = 15;
         }
+
 
         if (nearestEnemy != null && shortestDistance <= range)
         {

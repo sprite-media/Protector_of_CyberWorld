@@ -142,14 +142,18 @@
 				return;
 			}
 
-			if (tf.tag == "Enemy")
-			{
-				tf.GetComponent<Enemy>().TakeDamage(Damage);
-			}
-			else if (tf.tag == "Tower")
-			{
-				tf.GetComponent<PlayerBuilding>().TakeDamage(Damage);
-			}
+            if (tf.tag == "Enemy")
+            {
+                tf.GetComponent<Enemy>().TakeDamage(Damage);
+            }
+            else if (tf.tag == "Boss")
+            {
+                tf.GetComponent<Enemy>().TakeDamage(Damage);
+            }
+            else if (tf.tag == "Tower")
+            {
+                tf.GetComponent<PlayerBuilding>().TakeDamage(Damage);
+            }
 			if (!DontDestroyOnHit) {
 
 				// Logic

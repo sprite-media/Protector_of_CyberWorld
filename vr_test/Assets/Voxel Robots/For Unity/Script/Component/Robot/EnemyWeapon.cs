@@ -12,7 +12,7 @@
 
 		#region --- VAR ---
 
-		Enemy enemy = null;
+		Virus enemy = null;
 
 		// Shot Cut
 
@@ -187,7 +187,7 @@
 		{
 			InitLocalPos = Model.localPosition;
 			StopAllParticles();
-			enemy = transform.parent.parent.parent.GetComponent<Enemy>();
+			enemy = transform.parent.parent.parent.GetComponent<Virus>();
 			Damage = enemy.Power;
 		}
 

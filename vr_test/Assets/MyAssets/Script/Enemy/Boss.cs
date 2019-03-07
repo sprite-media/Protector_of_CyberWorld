@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Collections;
 
-public class Boss : MonoBehaviour
+public class Boss : Enemy
 {
     #region basic status
-    public float hp = 20.0f;
-    public float dmg = 2.0f;
+
     float closeRangeAttackSpeed = 7.0f;
     float curTime = 0.0f;
     #endregion
@@ -62,6 +61,9 @@ public class Boss : MonoBehaviour
         animator = GetComponent<Animator>();
 
         gameObject.SetActive(false);
+
+        hp = 50.0f;
+        damage = 2.0f;
     }
     private void Update()
     {
@@ -106,7 +108,8 @@ public class Boss : MonoBehaviour
     private void Move_F()
     {
         float targetDistance = Vector3.Distance(transform.position, curTarget.position);
-        var quaternion = Quaternion.LookRotation(curTarget.position - transform.position);
+        Vector3 temp = new Vector3(curTarget.position.x, -4.5f, curTarget.position.z);
+        var quaternion = Quaternion.LookRotation(temp - transform.position);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, quaternion, rotateSpeed * Time.deltaTime); // make roation first
 
         if(targetDistance > slowingDistance) //increase the speed
@@ -148,7 +151,7 @@ public class Boss : MonoBehaviour
     }
     public void AttackApply(AnimationEvent animationEvent)
     {
-        targetList[0].GetComponent<PlayerBuilding>().TakeDamage(dmg);
+        targetList[0].GetComponent<PlayerBuilding>().TakeDamage(damage);
     }
 
     private void GetHit()
@@ -163,7 +166,7 @@ public class Boss : MonoBehaviour
     #endregion
 
     #region Hit, Get Damaged..
-    public void Death()
+    public override void Death()
     {
         if (!isDead && !isDeadUsed)
         {
@@ -183,15 +186,11 @@ public class Boss : MonoBehaviour
         Destroy(gameObject, 2.0f);
     }
 
-    public void TakeDamage(float dmg)
+    public override void TakeDamage(float dmg)
     {
-        hp -= dmg;
-        if (hp <= 0.0f)
-        {
-            hp = 0.0f;
-            Death();
-        }
-        if (Random.Range(0, 20) == 19) //5%
+        base.TakeDamage(dmg);
+        Debug.Log("boss hp : " + hp);
+        if (Random.Range(0, 100) == 1) 
             curState = STATE.HIT;
     }
     #endregion

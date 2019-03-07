@@ -49,9 +49,9 @@ namespace Hyukin
                 {
                     hit.transform.GetComponent<Enemy>().TakeDamage(damage);
 				}
-                else if(hit.transform.tag == "Boss")
+                else if (hit.transform.tag == "Boss")
                 {
-                    hit.transform.GetComponent<Boss>().TakeDamage(damage);
+                    hit.transform.GetComponent<Enemy>().TakeDamage(damage);
                 }
             }
             else
