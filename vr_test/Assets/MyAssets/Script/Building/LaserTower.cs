@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class LaserTower : Tower
 {
-	private static GameObject particle = null;
-    private LineRenderer laser;
-    private float dist;
-    public float lineDrawSpeed = 6.0f;
-    public float lineCool = 1.0f;
+	//private static GameObject particle = null;
+    //private LineRenderer laser;
+    //private float dist;
+    //public float lineDrawSpeed = 6.0f;
+    //public float lineCool = 1.0f;
 
     // Start is called before the first frame update
     new void Start()
@@ -15,10 +15,9 @@ public class LaserTower : Tower
         base.Start();
 
         hp = 3.0f;
-        laser = transform.Find("Laser").GetComponent<LineRenderer>();
-        fireRate = 0.5f;
-		if(particle == null)
-			particle = Resources.Load("Particle_LaserHit", typeof(GameObject)) as GameObject;
+
+		//if(particle == null)
+			//particle = Resources.Load("Particle_LaserHit", typeof(GameObject)) as GameObject;
 	}
 
     // Update is called once per frame
@@ -30,42 +29,31 @@ public class LaserTower : Tower
     public override void Shoot()
     {
         ///Debug.Log("SSSSS");
-        laser.enabled = true;
-        laser.SetPosition(0, firePoint.position);
-        laser.SetPosition(1, target.position);
+        //laser.enabled = true;
+        //laser.SetPosition(0, firePoint.position);
+        //laser.SetPosition(1, target.position);
 
-		Ray ray = new Ray(firePoint.position, target.position);
-		RaycastHit hit;
-		GameObject tempParticle;
-		tempParticle = (GameObject)Instantiate(particle, target.position, target.rotation);
-		tempParticle.SetActive(true);
-		Destroy(tempParticle, 1.4f);
-		if (Physics.Raycast(ray, out hit))
-		{
-			tempParticle.transform.position = hit.point;
-		}
+		//Ray ray = new Ray(firePoint.position, target.position);
+		//RaycastHit hit;
+		//GameObject tempParticle;
+		///tempParticle = (GameObject)Instantiate(particle, target.position, target.rotation);
+		//tempParticle.SetActive(true);
+		//Destroy(tempParticle, 1.4f);
+		//if (Physics.Raycast(ray, out hit))
+		//{
+			//tempParticle.transform.position = hit.point;
+		//}
 
-        target.GetComponent<Enemy>().TakeDamage(weaponDmg);
-        StartCoroutine("TurnOffLaser");
+        //target.GetComponent<Enemy>().TakeDamage(weaponDmg);
+        //StartCoroutine("TurnOffLaser");
 	}
 
-    IEnumerator TurnOffLaser()
-    {
-        yield return new WaitForSeconds(0.1f);
-        laser.enabled = false;
-	}
+    //IEnumerator TurnOffLaser()
+    //{
+        //yield return new WaitForSeconds(0.1f);
+        //laser.enabled = false;
+	//}
 
-
-	public override void PreparedToShoot()
-    {
-        if (fireCountdown >= fireRate)
-        {
-            Shoot();
-            fireCountdown = 0.0f;
-        }
-
-        fireCountdown += Time.deltaTime;
-    }
 
     public override void TakeDamage(float amt)
     {
@@ -89,9 +77,4 @@ public class LaserTower : Tower
     }
 
 
-    public override void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, range);
-    }
 }

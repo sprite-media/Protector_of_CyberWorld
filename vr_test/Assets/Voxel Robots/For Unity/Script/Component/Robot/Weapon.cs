@@ -10,6 +10,7 @@
 
 		#region --- VAR ---
 
+		Tower tower = null;
 
 		// Shot Cut
 
@@ -163,6 +164,7 @@
 		void Awake () {
 			InitLocalPos = Model.localPosition;
 			StopAllParticles();
+			tower = transform.parent.parent.parent.GetComponent<Tower>();
 		}
 
 
@@ -202,7 +204,7 @@
 
 		void KeyUpdate () {
 
-			if (Input.GetKey(AttackKey)) {
+			if (tower.HasTarget) {
 				if (ReadyToShoot) {
 					Attack();
 					PlayAllParticles();
@@ -215,8 +217,6 @@
 				}
 			}
 		}
-
-
 
 		void ModelUpdate () {
 			float t = Time.time - PrevAttackTime;

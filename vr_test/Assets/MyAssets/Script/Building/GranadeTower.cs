@@ -11,35 +11,27 @@ public class GranadeTower : Tower
         base.Start();
         hp = 4.0f;
         fireEffect = Resources.Load("Granade", typeof(GameObject)) as GameObject;
-        fireRate = 1.0f;
+ 
     }
 
     new void Update()
     {
         base.Update();
     }
-    public override void PreparedToShoot()
-    {
-        if (fireCountdown <= 0f)
-        {
-            Shoot();
-            fireCountdown = 1f / fireRate;
-        }
 
-        fireCountdown -= Time.deltaTime;
-    }
     public override void Shoot()
     {
-        GameObject bulletGO = (GameObject)Instantiate(fireEffect, firePoint.position, firePoint.rotation);
-        Bullet bullet = bulletGO.GetComponent<Bullet>();
+		base.Shoot();
+        //GameObject bulletGO = (GameObject)Instantiate(fireEffect, firePoint.position, firePoint.rotation);
+        //Bullet bullet = bulletGO.GetComponent<Bullet>();
 
-        if (bullet != null)
-        {
-            bullet.Seek(target);
-        }
+        //if (bullet != null)
+        //{
+            //bullet.Seek(target);
+        //}
     }
 
-    public override void TakeDamage(float amt)
+	public override void TakeDamage(float amt)
     {
         hp -= amt;
         if (hp <= 0)
@@ -60,9 +52,5 @@ public class GranadeTower : Tower
         Destroy(gameObject);
     }
 
-    public override void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, range);
-    }
+ 
 }

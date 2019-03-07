@@ -21,6 +21,7 @@ namespace MoenenGames.VoxelRobot {
 		Ice = 2,
 		Elec = 3,
 		Radiation = 4,
+		Explosive = 5
 	}
 
 

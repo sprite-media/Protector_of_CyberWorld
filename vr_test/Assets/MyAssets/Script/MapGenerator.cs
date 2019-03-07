@@ -16,16 +16,15 @@ public class MapGenerator : MonoBehaviour
 	{
 		if (mapData == null)
 		{
-			tile = new GameObject[6];
+			tile = new GameObject[7];
 			tile[0] = Resources.Load("Tile", typeof(GameObject)) as GameObject;
 			tile[1] = Resources.Load("Path", typeof(GameObject)) as GameObject;
 			tile[2] = tile[1];
 
-			tile[3] = Resources.Load("LaserTower", typeof(GameObject)) as GameObject;
-			//*
-			  tile[4] = Resources.Load("Trap", typeof(GameObject)) as GameObject;
-			//*/
+			tile[3] = Resources.Load("Tower1", typeof(GameObject)) as GameObject;
+			tile[4] = Resources.Load("Trap", typeof(GameObject)) as GameObject;
 			tile[5] = Resources.Load("Spawner", typeof(GameObject)) as GameObject;
+			tile[6] = Resources.Load("Tower2", typeof(GameObject)) as GameObject;
 
 			playerBase = Resources.Load("Base", typeof(GameObject)) as GameObject;
 
@@ -82,7 +81,7 @@ public class MapGenerator : MonoBehaviour
 					case 3://Tower
 					{
 						//*Transform adjustment if needed
-						temp.transform.position = new Vector3(temp.transform.position.x, 0.5f, temp.transform.position.z);
+						temp.transform.position = new Vector3(temp.transform.position.x, -0.5f, temp.transform.position.z);
 						//*/
 						//Creating tile under the tower
 						GameObject tempF = (GameObject)Instantiate(tile[0], new Vector3(i, 0, j), tile[0].transform.rotation);
@@ -109,6 +108,16 @@ public class MapGenerator : MonoBehaviour
 						/*Transform adjustment if needed
 						temp.transform.position = new Vector3(temp.transform.position.x, VALUE YOU WANT, temp.transform.position.z);
 						//*/
+						break;
+					}
+					case 6://Grenade Tower
+					{
+						//*Transform adjustment if needed
+						temp.transform.position = new Vector3(temp.transform.position.x, -0.5f, temp.transform.position.z);
+						//*/
+						//Creating tile under the tower
+						GameObject tempF = (GameObject)Instantiate(tile[0], new Vector3(i, 0, j), tile[0].transform.rotation);
+						tempF.transform.parent = transform;
 						break;
 					}
 				}// end of switch

@@ -142,7 +142,10 @@
 				return;
 			}
 
-
+			if (tf.tag == "Enemy")
+			{
+				tf.GetComponent<Enemy>().TakeDamage(Damage);
+			}
 			if (!DontDestroyOnHit) {
 
 				// Logic
@@ -178,6 +181,10 @@
 			Alive = false;
 			if (Col) {
 				Col.enabled = false;
+			}
+			if (damegeType == DamageType.Explosive)
+			{
+				Particle.Play();
 			}
 		}
 
