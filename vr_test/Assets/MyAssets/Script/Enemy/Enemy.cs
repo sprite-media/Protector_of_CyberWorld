@@ -43,7 +43,7 @@ public abstract class Enemy : MonoBehaviour
 	protected void Awake()
 	{
 		pathIndex = 0;
-		pathType = transform.position.x == PathFinding.Path[0][0].x ? 0 : 1;
+		pathType = transform.position.x <= PathFinding.Path[0][0].x ? 0 : 1;
 		priority = new int[2];
 		priorityIndex = 0;
 

@@ -4,6 +4,7 @@ using MoenenGames.VoxelRobot;
 
 public class Tower : PlayerBuilding
 {
+    [SerializeField] bool lookUp;
 	Weapon[] weapons = null;
 
     protected Transform target;
@@ -44,7 +45,11 @@ public class Tower : PlayerBuilding
 			Vector3 dir = target.position - transform.position;
 			Quaternion lookRotation = Quaternion.LookRotation(dir);
 			Vector3 rotation = Quaternion.Lerp(partToRatate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
-			partToRatate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+
+        if(lookUp)
+			partToRatate.rotation = Quaternion.Euler(rotation.x, rotation.y, 0f);
+        else
+            partToRatate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
     }
 	public virtual void Shoot()
 	{
