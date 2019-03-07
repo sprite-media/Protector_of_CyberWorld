@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    int count = 0;
 	private static int[,] mapData = null;
 	private GameObject[] tile = null;
 	private GameObject playerBase = null;
@@ -73,8 +74,10 @@ public class MapGenerator : MonoBehaviour
 						// Base
 						if (j == 0 && mapData[i, j] == 1)
 						{
-							Instantiate(playerBase, new Vector3(i + 0.5f, 1, j - 1), playerBase.transform.rotation);
-						}
+							temp = Instantiate(playerBase, new Vector3(i + 0.5f, 1, j - 1), playerBase.transform.rotation);
+                            Boss.Instance.targetList.Add(temp);
+                            temp.GetComponent<PlayerBuilding>().number = count++;
+                        }
 							
 						break;
 					}
@@ -86,7 +89,10 @@ public class MapGenerator : MonoBehaviour
 						//Creating tile under the tower
 						GameObject tempF = (GameObject)Instantiate(tile[0], new Vector3(i, 0, j), tile[0].transform.rotation);
 						tempF.transform.parent = transform;
-						break;
+
+                        Boss.Instance.targetList.Add(temp);
+                        temp.GetComponent<PlayerBuilding>().number = count++;
+                        break;
 					}
 					case 4://Trap
 					{
@@ -101,7 +107,10 @@ public class MapGenerator : MonoBehaviour
 						GameObject tempF = (GameObject)Instantiate(tile[tempIndex], new Vector3(i, 0, j), tile[mapData[i, j]].transform.rotation);
 						tempF.transform.parent = transform;
 						mapData[i, j] = tempIndex;
-						break;
+
+                       Boss.Instance.targetList.Add(temp);
+                       temp.GetComponent<PlayerBuilding>().number = count++;
+                       break;
 					}
 					case 5://Spawner
 					{
@@ -118,11 +127,15 @@ public class MapGenerator : MonoBehaviour
 						//Creating tile under the tower
 						GameObject tempF = (GameObject)Instantiate(tile[0], new Vector3(i, 0, j), tile[0].transform.rotation);
 						tempF.transform.parent = transform;
-						break;
+
+                        Boss.Instance.targetList.Add(temp);
+                        temp.GetComponent<PlayerBuilding>().number = count++;
+                        break;
 					}
 				}// end of switch
 			}// end of row
 		}// end of column
+        Boss.Instance.PickTheTarget();
 	}
 
 

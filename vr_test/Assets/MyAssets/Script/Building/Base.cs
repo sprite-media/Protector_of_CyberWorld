@@ -32,14 +32,16 @@ public class Base : PlayerBuilding
 	}
 	public override void Death()
 	{
-		// Display Lose text
+        // Display Lose text
+        base.Death();
 		Debug.Log("Lose");
 	}
 
 	// Called when enemy is attacking
 	public override void TakeDamage(float amt)
 	{
-		base.TakeDamage(amt);
+        if (hp <= 0) return;
+        base.TakeDamage(amt);
 		Debug.Log(hp);
 		//Update Health bar
 	}

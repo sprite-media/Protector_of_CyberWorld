@@ -23,7 +23,6 @@ public class Tower : PlayerBuilding
     public string enemyTag = "Enemy";
 
     protected Transform partToRatate;
-	private bool isDead = false;
 
     public float turnSpeed = 10f;
 
@@ -41,8 +40,7 @@ public class Tower : PlayerBuilding
     // Update is called once per frame
     public void Update()
     {
-		if (!isDead)
-		{
+
 			UpdateTarget();
 
 			if (target == null)
@@ -52,7 +50,7 @@ public class Tower : PlayerBuilding
 			Quaternion lookRotation = Quaternion.LookRotation(dir);
 			Vector3 rotation = Quaternion.Lerp(partToRatate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
 			partToRatate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
-		}
+		
     }
 	public virtual void Shoot()
 	{
@@ -97,9 +95,8 @@ public class Tower : PlayerBuilding
 	public override void Death()
 	{
 		base.Death();
-		isDead = true;
 		Debug.Log(gameObject.name + " Destroyed.");
-		//Destroy(partToRatate.gameObject);
+		Destroy(gameObject);
 	}
 
 }
