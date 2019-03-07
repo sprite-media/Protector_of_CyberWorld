@@ -172,8 +172,16 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 1
-        functionName: IsDeadOff
+      - time: 0.02795031
+        functionName: DeadAnimationHandler_1
+        data: 
+        objectReferenceParameter: {fileID: 1097663671, guid: e38cf75484071e1488d3284d8a7c80ce,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7857143
+        functionName: DeadAnimationEventHandler
         data: 
         objectReferenceParameter: {fileID: 1097663671, guid: e38cf75484071e1488d3284d8a7c80ce,
           type: 3}
@@ -183,7 +191,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 48
+      additiveReferencePoseFrame: 2
     isReadable: 1
   meshes:
     lODScreenPercentages: []

@@ -37,7 +37,7 @@ public class Boss : MonoBehaviour
 
     //attack type string
     string[] attackTypeString = { "Projectile Attack 01", "Projectile Attack 02",
-        "Telekinesis Lift and Slam", "Telekinesis Swing Right", "Telekinesis Swing Left" };
+                                 "Telekinesis Swing Right", "Telekinesis Swing Left" };
 
     public List<GameObject> targetList;
     private Animator animator;
@@ -143,7 +143,7 @@ public class Boss : MonoBehaviour
 
     private void CloseRangeAttack()
     {
-        int attackIndex = Random.Range(0, 5);
+        int attackIndex = Random.Range(0, 4);
         animator.SetBool(attackTypeString[attackIndex], true);
     }
     public void AttackApply(AnimationEvent animationEvent)
@@ -171,14 +171,16 @@ public class Boss : MonoBehaviour
             isDeadUsed = true;
             animator.SetBool("Die", isDead);
             Base.Instance.ReduceNumEnemy();
-            Destroy(gameObject, 1.0f);
         }
     }
-    public void IsDeadOff(AnimationEvent animationEvent)
+    public void DeadAnimationHandler_1(AnimationEvent animationEvent)
     {
-        isDead = false;
-        animator.SetBool("Die", isDead);
-        //Destroy(gameObject, 0.5f);
+        animator.SetBool("Die", false);
+    }
+    public void DeadAnimationEventHandler(AnimationEvent animationEvent)
+    {
+        Debug.Log("woola");
+        Destroy(gameObject, 2.0f);
     }
 
     public void TakeDamage(float dmg)
@@ -189,7 +191,7 @@ public class Boss : MonoBehaviour
             hp = 0.0f;
             Death();
         }
-        if (Random.Range(0, 10) == 1) //10%
+        if (Random.Range(0, 20) == 19) //5%
             curState = STATE.HIT;
     }
     #endregion
