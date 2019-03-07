@@ -20,8 +20,8 @@ public class RespawnScript : MonoBehaviour
 	{
 		maxEnmey = maxVirus[0] + maxVirus[1];
 		enemy = new GameObject[2];
-		enemy[0] = Resources.Load("Virus1", typeof(GameObject)) as GameObject;
-		enemy[1] = Resources.Load("Virus2", typeof(GameObject)) as GameObject;
+		enemy[0] = Resources.Load("V1", typeof(GameObject)) as GameObject;
+		enemy[1] = Resources.Load("V2", typeof(GameObject)) as GameObject;
 	}
 	void Start()
     {
@@ -68,8 +68,8 @@ public class RespawnScript : MonoBehaviour
 		maxVirus[enemyType]--;
 
 		// spawn enemy
-		Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + enemy[enemyType].transform.localScale.y/2.0f, transform.position.z);
-        Instantiate(enemy[enemyType], spawnPosition, transform.rotation); //enemy spawned here
+		//Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + enemy[enemyType].transform.localScale.y/2.0f, transform.position.z);
+        Instantiate(enemy[enemyType], transform.position, transform.rotation); //enemy spawned here
         numOfEnemy++;
         //Debug.Log(numOfEnemy);
     }

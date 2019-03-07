@@ -23,6 +23,8 @@ public abstract class Enemy : MonoBehaviour
 	private Vector3 targetPath = Vector3.zero;
 
 	private PlayerBuilding targetBuilding = null;
+	public PlayerBuilding Target { get { return targetBuilding; } }
+	public bool HasTarget { get { if (currentState == State.Attack) return true; else return false; } }
 	private Vector3 targetBuildingPos = Vector3.zero;
 	private float attackTimer = 0.0f;
 	protected float attackCoolTime = 0.0f;
@@ -33,7 +35,9 @@ public abstract class Enemy : MonoBehaviour
 
 	protected float hp = 0;
 	protected float power = 0.0f;
+	public float Power { get { return power; } }
 	protected float detectRange = 1.5f;
+	protected float attackRange = 1.0f;
 	protected float speed = 3.0f;
 
 	protected void Awake()
@@ -73,7 +77,7 @@ public abstract class Enemy : MonoBehaviour
 		UpdateTargetPath();
 	}
 
-	private void Update()
+	public virtual void Update()
 	{
 		switch ((int)currentState)
 		{
@@ -101,13 +105,13 @@ public abstract class Enemy : MonoBehaviour
 	private void UpdateTargetPath()
 	{
 		Vector3 temp = PathFinding.Path[pathType][pathIndex];
-		targetPath = new Vector3(temp.x, transform.localScale.y / 2.0f, temp.z);
+		targetPath = PathFinding.Path[pathType][pathIndex]; //new Vector3(temp.x, transform.localScale.y / 2.0f, temp.z);
 	}
 	private void UpdateTargetBuilding(PlayerBuilding target)
 	{
 		targetBuilding = target;
 		Vector3 temp = targetBuilding.transform.position;
-		targetBuildingPos = new Vector3(temp.x, transform.localScale.y / 2.0f, temp.z);
+		targetBuildingPos = targetBuilding.transform.position; //new Vector3(temp.x, transform.localScale.y / 2.0f, temp.z);
 		currentState = State.InRange;
 	}
 	public void BackToPath()
@@ -179,9 +183,10 @@ public abstract class Enemy : MonoBehaviour
 	{
 		if (targetBuilding != null)
 		{
-			transform.LookAt(targetBuildingPos);
+			Vector3 temp = new Vector3(targetBuildingPos.x, transform.position.y, targetBuildingPos.z);
+			transform.LookAt(temp);
 			transform.Translate(Vector3.forward * speed * Time.deltaTime);
-			if (Vector3.Distance(transform.position, targetBuildingPos) < 1.0f)
+			if (Vector3.Distance(transform.position, temp) < attackRange)
 			{
 				currentState = State.Attack;
 			}
@@ -213,17 +218,9 @@ public abstract class Enemy : MonoBehaviour
 
 	public virtual void Attack()
 	{
-		if (targetBuilding != null)
-		{
-			if (attackTimer > 2)
-			{
-				targetBuilding.TakeDamage(1);
-				attackTimer = 0;
-			}
-			attackTimer += Time.deltaTime;
-			//animation control
-		}
-		else
+		Vector3 temp = new Vector3(targetBuildingPos.x, transform.position.y, targetBuildingPos.z);
+		transform.LookAt(temp);
+		if (targetBuilding == null)
 		{
 			BackToPath();
 		}

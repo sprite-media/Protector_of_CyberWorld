@@ -146,6 +146,10 @@
 			{
 				tf.GetComponent<Enemy>().TakeDamage(Damage);
 			}
+			else if (tf.tag == "Tower")
+			{
+				tf.GetComponent<PlayerBuilding>().TakeDamage(Damage);
+			}
 			if (!DontDestroyOnHit) {
 
 				// Logic

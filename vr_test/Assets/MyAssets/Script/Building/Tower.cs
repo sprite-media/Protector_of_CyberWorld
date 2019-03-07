@@ -43,7 +43,7 @@ public class Tower : PlayerBuilding
     {
 		if (!isDead)
 		{
-			UpdateTarget();
+			//UpdateTarget();
 
 			if (target == null)
 				return;
@@ -71,11 +71,10 @@ public class Tower : PlayerBuilding
 	}
 	public void UpdateTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
-        foreach (GameObject enemy in enemies)
+        foreach (GameObject enemy in EnemyContainer.Enemies)
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             if (distanceToEnemy < shortestDistance)
@@ -99,7 +98,7 @@ public class Tower : PlayerBuilding
 		base.Death();
 		isDead = true;
 		Debug.Log(gameObject.name + " Destroyed.");
-		//Destroy(partToRatate.gameObject);
+		Destroy(gameObject);
 	}
 
 }

@@ -7,6 +7,8 @@ public class Virus3 : Enemy
 		base.Awake();
 		hp = 15.0f;
 		power = 5.0f;
+		detectRange = 3.0f;
+		attackRange = 1.5f;
 	}
 	protected new void Start()
 	{
