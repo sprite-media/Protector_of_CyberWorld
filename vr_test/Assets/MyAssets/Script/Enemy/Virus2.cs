@@ -68,7 +68,7 @@ public class Virus2 : Virus
 					{
 						target = e.transform;
 						currentState = State.InRange;
-					}
+                    }
 				}
 			}
 		}

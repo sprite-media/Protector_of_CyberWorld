@@ -187,6 +187,7 @@
 
 
 		public void Attack () {
+            tower.aud.Play();
 			ShootBullet();
 			TriggerLoghtOn();
 		}

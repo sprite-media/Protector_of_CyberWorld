@@ -6,6 +6,7 @@ public class Tower : PlayerBuilding
 {
     [SerializeField] bool lookUp;
 	Weapon[] weapons = null;
+    public AudioSource aud;
 
     protected Transform target;
 

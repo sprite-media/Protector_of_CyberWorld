@@ -7,7 +7,7 @@ namespace Hyukin
         LineRenderer gunLine;
         public float effectsDisplayTime = 0.2f; // how long lineRenderer will stay in a scene
         int shootableMask; //enemy or should be shootable
-
+        public AudioSource aud;
 		private static GameObject particle = null;
 
         private void Start()
@@ -34,7 +34,7 @@ namespace Hyukin
         protected override void Shoot()
         {
             base.Shoot();
-
+            aud.Play();
             gunLine.enabled = true;
             Transform shotTransform = transform; 
             gunLine.SetPosition(0, shotTransform.position);
