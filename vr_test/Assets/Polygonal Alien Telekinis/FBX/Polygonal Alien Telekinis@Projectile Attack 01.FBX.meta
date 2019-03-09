@@ -172,15 +172,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0
-        functionName: AttackApply
-        data: 
-        objectReferenceParameter: {fileID: 1097663671, guid: e38cf75484071e1488d3284d8a7c80ce,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.5933333
+      - time: 0.357997
         functionName: AttackApply
         data: 
         objectReferenceParameter: {fileID: 1097663671, guid: e38cf75484071e1488d3284d8a7c80ce,
@@ -191,7 +183,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 17.8
+      additiveReferencePoseFrame: 10
     isReadable: 1
   meshes:
     lODScreenPercentages: []

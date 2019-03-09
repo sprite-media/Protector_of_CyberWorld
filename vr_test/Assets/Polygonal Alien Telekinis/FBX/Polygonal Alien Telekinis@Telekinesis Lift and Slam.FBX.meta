@@ -151,14 +151,14 @@ ModelImporter:
     - serializedVersion: 16
       name: Telekinesis Lift and Slam
       takeName: Take 001
-      firstFrame: 29
+      firstFrame: 0
       lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
-      hasAdditiveReferencePose: 0
+      hasAdditiveReferencePose: 1
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
@@ -172,7 +172,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.7535014
+      - time: 0.58217484
         functionName: AttackApply
         data: 
         objectReferenceParameter: {fileID: 1097663671, guid: e38cf75484071e1488d3284d8a7c80ce,
@@ -183,7 +183,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 23
     isReadable: 1
   meshes:
     lODScreenPercentages: []

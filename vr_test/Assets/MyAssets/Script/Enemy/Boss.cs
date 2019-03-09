@@ -36,8 +36,12 @@ public class Boss : Enemy
     #endregion
 
     //attack type string
-    string[] attackTypeString = { "Projectile Attack 01", "Projectile Attack 02",
-                                 "Telekinesis Swing Right", "Telekinesis Swing Left" };
+    int attackIndex;
+    string[] attackTypeString = { "Projectile Attack 01", "Projectile Attack 02", "Telekinesis Lift and Slam",
+                                  "Telekinesis Swing Left", "Telekinesis Swing Right"};
+                                    //projectile Attack 01 = right hand , Projectile Attack 02 = left hand
+                                    //so attackTypeStirng[0, 2] is right hand and [1, 3] is left hand
+           
 
     public List<GameObject> targetList;
     private Animator animator;
@@ -63,8 +67,8 @@ public class Boss : Enemy
 
         gameObject.SetActive(false);
 
-        hp = 50.0f;
-        damage = 2.0f;
+        hp = 150.0f;
+        damage = 100.0f;
     }
     private void Update()
     {
@@ -147,12 +151,34 @@ public class Boss : Enemy
 
     private void CloseRangeAttack()
     {
-        int attackIndex = Random.Range(0, 4);
+        attackIndex = Random.Range(0, attackTypeString.Length);
         animator.SetBool(attackTypeString[attackIndex], true);
     }
     public void AttackApply(AnimationEvent animationEvent)
     {
-        targetList[0].GetComponent<PlayerBuilding>().TakeDamage(damage);
+        bool isLeftHandAttacking = (attackIndex % 2 == 1) ? true : false;
+
+        for (int i = 0; i < targetList.Count; i++)
+        {
+            Vector3 targetDir = targetList[i].transform.position - transform.position;
+            if (isLeftHandAttacking)
+            {               
+                if (Vector3.Distance(transform.position, targetList[i].transform.position) <= 10.0f &&
+                        Vector3.Angle(targetDir, transform.forward + -transform.right) < 75.0f)
+                {
+                    targetList[i].GetComponent<PlayerBuilding>().TakeDamage(damage);
+                }
+            }
+            else
+            {
+                if (Vector3.Distance(transform.position, targetList[i].transform.position) <= 10.0f &&
+                        Vector3.Angle(targetDir, transform.forward + transform.right) < 75.0f)
+                {
+                    targetList[i].GetComponent<PlayerBuilding>().TakeDamage(damage);
+                }
+            }
+
+        }
     }
 
     private void GetHit()
@@ -192,7 +218,7 @@ public class Boss : Enemy
     public override void TakeDamage(float dmg)
     {
         base.TakeDamage(dmg);
-        if (Random.Range(0, 100) == 1) 
+        if (Random.Range(0, 150) == 1) 
             curState = STATE.HIT;
     }
     #endregion

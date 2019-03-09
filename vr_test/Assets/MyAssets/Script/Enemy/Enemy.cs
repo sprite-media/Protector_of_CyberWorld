@@ -7,6 +7,9 @@ public abstract class Enemy : MonoBehaviour
 	protected float hp = 0;
     protected float damage = 0.0f;
 
+    public float GetHealth() { return hp; }
+    public float GetDamage() { return damage; }
+
 	public virtual void Death()
 	{
         Base.Instance.ReduceNumEnemy();
