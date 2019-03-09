@@ -7,7 +7,7 @@ public class Tower : PlayerBuilding
     [SerializeField] bool lookUp;
 	Weapon[] weapons = null;
     public AudioSource aud;
-
+    
     protected Transform target;
 
 	public bool HasTarget {
@@ -33,7 +33,6 @@ public class Tower : PlayerBuilding
 		hp = 20.0f;
 		InvokeRepeating("UpdateTarget", 0f, 0.5f); // Inorder to not to call UpdateTarget function in every frame.
         partToRatate = transform.Find("Base");
-        //firePoint = transform.Find("PartRotation").Find("Sphere").Find("Firepoint");
 		weapons = transform.Find("Base").Find("Turret").GetComponentsInChildren<Weapon>();
     }
 
@@ -47,9 +46,14 @@ public class Tower : PlayerBuilding
 			Quaternion lookRotation = Quaternion.LookRotation(dir);
 			Vector3 rotation = Quaternion.Lerp(partToRatate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
 
-        if(lookUp)
-			partToRatate.rotation = Quaternion.Euler(rotation.x, rotation.y, 0f);
-        else
+        if(lookUp)//tower1
+        {
+            if(Base.Instance.GetTotalNumEnemy() == 1)
+                partToRatate.rotation = Quaternion.Euler(rotation.x, rotation.y, 0f);
+            else
+                partToRatate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+        }		
+        else //tower2
             partToRatate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 
         if (Base.Instance.GetTotalNumEnemy() <= 0)

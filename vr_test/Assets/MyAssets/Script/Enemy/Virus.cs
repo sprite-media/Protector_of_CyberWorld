@@ -26,7 +26,6 @@ public abstract class Virus : Enemy
     public PlayerBuilding Target { get { return targetBuilding; } }
     public bool HasTarget { get { if (currentState == State.Attack) return true; else return false; } }
     private Vector3 targetBuildingPos = Vector3.zero;
-    private float attackTimer = 0.0f;
     protected float attackCoolTime = 0.0f;
     protected int[] priority = null; // if priority starts from -1, it attacks all buildings
     private int priorityIndex = 0;
