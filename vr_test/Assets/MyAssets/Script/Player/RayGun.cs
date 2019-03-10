@@ -4,7 +4,7 @@ namespace Hyukin
 {
     public class RayGun : GunParent
     {
-        LineRenderer gunLine;
+        public LineRenderer gunLine;
         public float effectsDisplayTime = 0.2f; // how long lineRenderer will stay in a scene
         int shootableMask; //enemy or should be shootable
         public AudioSource aud;
@@ -12,7 +12,7 @@ namespace Hyukin
 
         private void Start()
         {
-            gunLine = GetComponent<LineRenderer>();
+            //gunLine = GetComponent<LineRenderer>();
 			if(particle == null)
 				particle = Resources.Load("Particle_LaserHit", typeof(GameObject)) as GameObject;
 		}

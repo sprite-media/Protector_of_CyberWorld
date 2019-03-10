@@ -4495,7 +4495,7 @@ ParticleSystem:
 --- !u!199 &199000013111679650
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -4608,6 +4608,7 @@ MonoBehaviour:
   StopOnHit: 0
   Particle: {fileID: 198000012753252288}
   Model: {fileID: 4532326319530510}
+  audio: {fileID: 82612824529578570}
   Alive: 1
 --- !u!54 &54000011215077958
 Rigidbody:
@@ -4756,7 +4757,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4ed821b835a2bd54c9b92658cdb7fede, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 42c6c585507d13d4cb2b6f0c51c99580, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1.2

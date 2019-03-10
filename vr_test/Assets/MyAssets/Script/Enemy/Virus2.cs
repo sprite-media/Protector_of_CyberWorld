@@ -3,7 +3,8 @@
 public class Virus2 : Virus
 {
 	private static GameObject virus3 = null;
-	[SerializeField]
+    [SerializeField]
+    AudioClip deathClip;
 	private Transform target = null;
 	private float virusDetectRange;
 
@@ -50,12 +51,22 @@ public class Virus2 : Virus
                 GameObject temp = (GameObject)Instantiate(virus3, transform.position, transform.rotation);
 				temp.GetComponent<Virus3>().PathType = this.pathType;
 				temp.GetComponent<Virus3>().BackToPath();
+                audio.Play();
 				Destroy(target.gameObject);
 				Destroy(gameObject);
 			}
 		}
 	}
-	private void HasVirus()
+    public override void Death()
+    {
+        particle.SetActive(true);
+        particle.transform.parent = null;
+        audio.clip = deathClip;
+        audio.Play();
+        Destroy(particle, 3);
+        base.Death();
+    }
+    private void HasVirus()
 	{
 		foreach(GameObject g in EnemyContainer.Enemies)
 		{

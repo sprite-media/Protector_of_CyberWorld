@@ -35,8 +35,12 @@ public class MapGenerator : MonoBehaviour
 
 	private void LoadMapData()
 	{
-		TextAsset mapCSV = Resources.Load("MapData", typeof(TextAsset)) as TextAsset;
-		string[] column = mapCSV.text.Split('\n');
+        /*/
+		TextAsset mapCSV = Resources.Load("test_MapData", typeof(TextAsset)) as TextAsset;
+        /*/
+        TextAsset mapCSV = Resources.Load("MapData", typeof(TextAsset)) as TextAsset;
+        //*/
+        string[] column = mapCSV.text.Split('\n');
 		string[] row = column[0].Split(',');
 		mapData = new int[column.Length,row.Length];
 		x = column.Length;

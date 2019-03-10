@@ -13,6 +13,7 @@
 		#region --- VAR ---
 
 		Virus enemy = null;
+        [SerializeField] AudioSource audio;
 
 		// Shot Cut
 
@@ -214,6 +215,8 @@
 		public void Attack()
 		{
 			enemy.Target.TakeDamage(Damage);
+            if (audio)
+                audio.Play();
 			ShootBullet();
 			TriggerLoghtOn();
 		}

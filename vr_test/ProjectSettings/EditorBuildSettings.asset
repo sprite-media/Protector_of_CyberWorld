@@ -5,16 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/MyAssets/Scene/MainMenu.unity
     guid: 34d5aad03aabacc4cb2837aa8fbf9a9e
   - enabled: 1
+    path: Assets/MyAssets/Scene/MainMenu_woPlayer.unity
+    guid: e74cfd0eed41b22438b0ed6531bde496
+  - enabled: 1
     path: Assets/MyAssets/Scene/tempMap.unity
     guid: 3162fe60e38794a49a26e77a33bced7a
-  - enabled: 1
-    path: Assets/MyAssets/Scene/MainMenu_woPlayer.unity
-    guid: d8537b1093ba64e478d5f78203d4e249
   m_configObjects: {}

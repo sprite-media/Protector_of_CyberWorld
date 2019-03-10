@@ -8,6 +8,10 @@ public class Base : PlayerBuilding
 	private int numEnemiesLeft = 0;
 
     private GameObject UI_parent = null;
+
+    [SerializeField] AudioSource audio;
+    [SerializeField] AudioClip[] clips; //  0 : win     1 : Lose        2 : attacked
+    private bool coolTIme = false;
     //UI text for lose
     //UI for hp
     //UI for resource
@@ -52,13 +56,16 @@ public class Base : PlayerBuilding
             //*/
         }
 	}
-	private void Win()
+    private void Win()
 	{
         //Display Win text
         UI_parent.SetActive(true);
         Texture texture = Resources.Load("Win", typeof(Texture2D)) as Texture;
         UI_parent.transform.Find("Background").Find("Title").GetComponent<Renderer>().material.SetTexture("_MainTex", texture);
         UI_parent.GetComponent<UIContainer>().LookAtPlayer();
+
+        audio.clip = clips[0];
+        audio.Play();
     }
 	public override void Death()
 	{
@@ -68,6 +75,10 @@ public class Base : PlayerBuilding
         Texture texture = Resources.Load("Win", typeof(Texture2D)) as Texture;
         UI_parent.transform.Find("Background").Find("Title").GetComponent<Renderer>().material.SetTexture("_MainTex", texture);
         UI_parent.GetComponent<UIContainer>().LookAtPlayer();
+
+        audio.clip = clips[1];
+        audio.Play();
+
         base.Death();
     }
 
@@ -77,10 +88,22 @@ public class Base : PlayerBuilding
         if (hp <= 0) return;
         base.TakeDamage(amt);
 		Debug.Log("Base left hp is: " + hp);
-		//Update Health bar
-	}
 
-	public void SetTotalNumEnemy(int num)
+        if (!coolTIme)
+        {
+            audio.clip = clips[2];
+            audio.Play();
+            coolTIme = true;
+            StartCoroutine("AudioCoolTime");
+        }
+        //Update Health bar
+    }
+    IEnumerator AudioCoolTime()
+    {
+        yield return new WaitForSeconds(2.0f);
+        coolTIme = false;
+    }
+    public void SetTotalNumEnemy(int num)
 	{
 		numEnemiesLeft = num;
 	}

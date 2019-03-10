@@ -13,6 +13,8 @@ public abstract class Virus : Enemy
     }
     protected State currentState = State.Path;
 
+    [SerializeField] protected AudioSource audio;
+
     //All enemies share the same targets
     private static PlayerBuilding[][] TargetList = null;    // array0 : Base   array1 : Towers    array2 : Traps
     public static PlayerBuilding[][] Targets { get { return TargetList; } }
@@ -30,7 +32,7 @@ public abstract class Virus : Enemy
     protected int[] priority = null; // if priority starts from -1, it attacks all buildings
     private int priorityIndex = 0;
 
-    private GameObject particle = null;
+    protected GameObject particle = null;
 
     public float Power { get { return damage; } }
     protected float detectRange = 1.5f;
@@ -227,6 +229,8 @@ public abstract class Virus : Enemy
     {
         particle.SetActive(true);
         particle.transform.parent = null;
+        if(audio)
+            audio.Play();
         Destroy(particle, 3);
         base.Death();
     }

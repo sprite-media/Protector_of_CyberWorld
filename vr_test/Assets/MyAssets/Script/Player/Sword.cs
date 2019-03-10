@@ -12,12 +12,6 @@ public class Sword : MonoBehaviour
         damage = 2.0f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Grabbed()
     {
         hand = transform.parent.parent.GetComponent<Hand>();
@@ -30,7 +24,7 @@ public class Sword : MonoBehaviour
         transform.parent.GetComponent<Rigidbody>().isKinematic = false;
         hand = null;
         //Particle effect
-        Destroy(transform.parent.gameObject);
+        //Destroy(transform.parent.gameObject);
     }
 
     private void OnTriggerEnter(Collider col)

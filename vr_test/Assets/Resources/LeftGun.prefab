@@ -143,6 +143,7 @@ MonoBehaviour:
   range: 100
   reFireTime: 0.15
   hand: {fileID: 0}
+  gunLine: {fileID: 11104102}
   effectsDisplayTime: 0.2
   aud: {fileID: 5019207648289550280}
 --- !u!1 &289045910
@@ -254,11 +255,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289045910}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.0058835074, y: 0.006967798, z: 0.010305792}
-  m_Center: {x: -0.00039481, y: 0.00013449311, z: -0.0012853066}
+  m_Size: {x: 0.0025294274, y: 0.0038517485, z: 0.0039252937}
+  m_Center: {x: -0.000081039965, y: -0.0003199291, z: 0.0005416651}
 --- !u!114 &289045911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,7 +389,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: dcd0df6127f63ec4cbe0eb76bdba29f6, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

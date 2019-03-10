@@ -66,6 +66,8 @@
 		private ParticleSystem Particle;
 		[SerializeField]
 		private Transform Model;
+        [SerializeField]
+        private AudioSource audio;
 
 
 		// Data
@@ -193,6 +195,8 @@
 			if (damegeType == DamageType.Explosive)
 			{
 				Particle.Play();
+                if (audio)
+                    audio.Play();
 			}
 		}
 
