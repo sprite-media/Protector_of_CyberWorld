@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4000010234580126
 Transform:
   m_ObjectHideFlags: 0
@@ -97,8 +97,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2
-      minScalar: 1
+      scalar: 1.16
+      minScalar: 0.18
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -456,7 +456,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 0
     randomizeRotationDirection: 0
-    maxNumParticles: 80
+    maxNumParticles: 15
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -4615,7 +4615,7 @@ MonoBehaviour:
   LifeTime: 1
   DontDestroyOnHit: 0
   StopOnHit: 1
-  Particle: {fileID: 198000012753252288}
+  Particle: {fileID: 0}
   Model: {fileID: 0}
   Alive: 1
 --- !u!54 &54000011215077958

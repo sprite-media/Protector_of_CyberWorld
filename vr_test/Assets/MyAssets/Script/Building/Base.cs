@@ -7,7 +7,7 @@ public class Base : PlayerBuilding
 	public Base BASE { get { return GameObject.Find("Base").GetComponent<Base>(); } }
 	private int numEnemiesLeft = 0;
 
-    //UI text for win
+    private GameObject UI_parent = null;
     //UI text for lose
     //UI for hp
     //UI for resource
@@ -41,19 +41,35 @@ public class Base : PlayerBuilding
 		{
 			hp = 50;// temp value
 			gameObject.name = "Base";
-		}
+            UI_parent = GameObject.Find("UI_Parent");
+            //*/
+            UI_parent.SetActive(false);
+            /*/
+            UI_parent.SetActive(true);
+            Texture texture = Resources.Load("Win", typeof(Texture2D)) as Texture;
+            UI_parent.transform.Find("Background").Find("Title").GetComponent<Renderer>().material.SetTexture("_MainTex", texture);
+            UI_parent.GetComponent<UIContainer>().LookAtPlayer();
+            //*/
+        }
 	}
 	private void Win()
 	{
-		//Display Win text
-		Debug.Log("Win");
-	}
+        //Display Win text
+        UI_parent.SetActive(true);
+        Texture texture = Resources.Load("Win", typeof(Texture2D)) as Texture;
+        UI_parent.transform.Find("Background").Find("Title").GetComponent<Renderer>().material.SetTexture("_MainTex", texture);
+        UI_parent.GetComponent<UIContainer>().LookAtPlayer();
+    }
 	public override void Death()
 	{
         // Display Lose text
+        UI_parent.SetActive(true);
+        // Change Texture to Lose
+        Texture texture = Resources.Load("Win", typeof(Texture2D)) as Texture;
+        UI_parent.transform.Find("Background").Find("Title").GetComponent<Renderer>().material.SetTexture("_MainTex", texture);
+        UI_parent.GetComponent<UIContainer>().LookAtPlayer();
         base.Death();
-		Debug.Log("Lose");
-	}
+    }
 
 	// Called when enemy is attacking
 	public override void TakeDamage(float amt)

@@ -17,27 +17,20 @@ public class MapGenerator : MonoBehaviour
 
 	private void Awake()
 	{
-		if (mapData == null)
-		{
-			tile = new GameObject[7];
-			tile[0] = Resources.Load("Tile", typeof(GameObject)) as GameObject;
-			tile[1] = Resources.Load("Path", typeof(GameObject)) as GameObject;
-			tile[2] = tile[1];
 
-			tile[3] = Resources.Load("Tower1", typeof(GameObject)) as GameObject;
-			tile[4] = Resources.Load("Trap", typeof(GameObject)) as GameObject;
-			tile[5] = Resources.Load("Spawner", typeof(GameObject)) as GameObject;
-			tile[6] = Resources.Load("Tower2", typeof(GameObject)) as GameObject;
+		tile = new GameObject[7];
+		tile[0] = Resources.Load("Tile", typeof(GameObject)) as GameObject;
+		tile[1] = Resources.Load("Path", typeof(GameObject)) as GameObject;
+		tile[2] = tile[1];
 
-			playerBase = Resources.Load("Base", typeof(GameObject)) as GameObject;
+		tile[3] = Resources.Load("Tower1", typeof(GameObject)) as GameObject;
+		tile[4] = Resources.Load("Trap", typeof(GameObject)) as GameObject;
+		tile[5] = Resources.Load("Spawner", typeof(GameObject)) as GameObject;
+		tile[6] = Resources.Load("Tower2", typeof(GameObject)) as GameObject;
 
-			LoadMapData();
-		}
-		else
-		{
-			Destroy(gameObject);
-			return;
-		}
+		playerBase = Resources.Load("Base", typeof(GameObject)) as GameObject;
+
+		LoadMapData();
 	}
 
 	private void LoadMapData()
