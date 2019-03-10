@@ -39,7 +39,7 @@ namespace Hyukin
             transform.parent.GetComponent<Rigidbody>().isKinematic = false;
             hand = null;
             //Particle effect
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
         public void Grabbed()
         {
