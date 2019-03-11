@@ -12,7 +12,12 @@ public class Trap : PlayerBuilding
 	public override void Death()
 	{
 		base.Death();
-		//Debug.Log(gameObject.name + " Destroyed");
-		Destroy(gameObject);
+        if (DeathEffect)
+        {
+            DeathEffect.SetActive(true);
+            DeathEffect.transform.parent = null;
+            Destroy(DeathEffect, 1.5f);
+        }
+        Destroy(gameObject);
 	}
 }

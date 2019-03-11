@@ -9,7 +9,6 @@ public class Base : PlayerBuilding
 
     private GameObject UI_parent = null;
 
-    [SerializeField] AudioSource audio;
     [SerializeField] AudioClip[] clips; //  0 : win     1 : Lose        2 : attacked
     private bool coolTIme = false;
     //UI text for lose

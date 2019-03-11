@@ -6,7 +6,8 @@ public class Tower : PlayerBuilding
 {
     [SerializeField] bool lookUp;
 	Weapon[] weapons = null;
-    public AudioSource aud;
+    public AudioSource aud { get { return audio; } }
+    [SerializeField] AudioClip deathClip;
     
     protected Transform target;
 
@@ -109,9 +110,14 @@ public class Tower : PlayerBuilding
     }
 	public override void Death()
 	{
-		base.Death();
-		//Debug.Log(gameObject.name + " Destroyed.");
-		Destroy(gameObject);
-	}
+        base.Death();
+        if (DeathEffect)
+        {
+            DeathEffect.SetActive(true);
+            DeathEffect.transform.parent = null;
+            Destroy(DeathEffect, 1.5f);
+        }
+        Destroy(gameObject);
+    }
 
 }

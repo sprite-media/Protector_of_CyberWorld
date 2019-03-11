@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerBuilding : MonoBehaviour
 {
+    [SerializeField] protected AudioSource audio;
+    [SerializeField] protected GameObject DeathEffect;
 	protected float hp = 0;
     public int number = 0;
 
@@ -19,5 +21,6 @@ public class PlayerBuilding : MonoBehaviour
     public virtual void Death()
     {
         Boss.Instance.UpdateTargetList(number);
+        audio.Play();
     }
 }
