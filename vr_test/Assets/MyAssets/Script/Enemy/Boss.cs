@@ -57,6 +57,11 @@ public class Boss : Enemy
     }
     #endregion
 
+    #region health bar
+    [SerializeField] GameObject HealthBar;
+    private float startHealth;
+    #endregion  
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -64,11 +69,13 @@ public class Boss : Enemy
         gameObject.SetActive(false);
 
         hp = 50.0f;
+        startHealth = hp;
         damage = 2.0f;
     }
     private void Update()
-    {
+    { 
         if (isDead) return;
+
         StateSelector();
         curTime += 0.1f;
     }
@@ -192,6 +199,7 @@ public class Boss : Enemy
     public override void TakeDamage(float dmg)
     {
         base.TakeDamage(dmg);
+        HealthBar.transform.localScale = new Vector3(hp/startHealth, 1, 1);
         if (Random.Range(0, 100) == 1) 
             curState = STATE.HIT;
     }
