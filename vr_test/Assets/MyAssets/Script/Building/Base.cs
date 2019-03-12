@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Base : PlayerBuilding
 {
-	public Base BASE { get { return GameObject.Find("Base").GetComponent<Base>(); } }
-	private int numEnemiesLeft = 0;
+    public Base BASE { get { return GameObject.Find("Base").GetComponent<Base>(); } }
+    private int numEnemiesLeft = 0;
 
     private GameObject UI_parent = null;
 
@@ -13,6 +13,8 @@ public class Base : PlayerBuilding
     private bool coolTIme = false;
     //UI text for lose
     //UI for hp
+    private float startHealth;
+    [SerializeField] GameObject Health;
     //UI for resource
     //UI for numEnemiesLeft
 
@@ -43,6 +45,7 @@ public class Base : PlayerBuilding
 		else
 		{
 			hp = 50;// temp value
+            startHealth = hp;
 			gameObject.name = "Base";
             UI_parent = GameObject.Find("UI_Parent");
             //*/
@@ -88,6 +91,7 @@ public class Base : PlayerBuilding
         base.TakeDamage(amt);
 		Debug.Log("Base left hp is: " + hp);
 
+        Health.transform.localScale = new Vector3(hp/startHealth, 1, 1);
         if (!coolTIme)
         {
             audio.clip = clips[2];
