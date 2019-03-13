@@ -55,6 +55,8 @@ namespace Valve.VR
             }
         }
 
+        public static object _default { get; internal set; }
+
         #region array accessors
         /// <summary>An array of all action sets</summary>
         public static SteamVR_ActionSet[] actionSets;

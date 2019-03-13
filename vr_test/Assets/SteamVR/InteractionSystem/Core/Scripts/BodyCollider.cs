@@ -6,6 +6,7 @@
 
 using UnityEngine;
 using System.Collections;
+using Valve.VR;
 
 namespace Valve.VR.InteractionSystem
 {
@@ -30,6 +31,8 @@ namespace Valve.VR.InteractionSystem
 			float distanceFromFloor = Vector3.Dot( head.localPosition, Vector3.up );
 			capsuleCollider.height = Mathf.Max( capsuleCollider.radius, distanceFromFloor );
 			transform.localPosition = head.localPosition - 0.5f * distanceFromFloor * Vector3.up;
-		}
+        }
+
+
 	}
 }
