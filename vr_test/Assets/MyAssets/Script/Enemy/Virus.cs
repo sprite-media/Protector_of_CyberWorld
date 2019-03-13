@@ -39,12 +39,16 @@ public abstract class Virus : Enemy
     protected float attackRange = 1.0f;
     protected float speed = 3.0f;
 
+	public bool CanAffectTotalNumber { get; set; }
+
     protected void Awake()
     {
         pathIndex = 0;
         pathType = transform.position.x <= PathFinding.Path[0][0].x ? 0 : 1;
         priority = new int[2];
         priorityIndex = 0;
+
+		CanAffectTotalNumber = true;
 
         particle = transform.Find("Particle_EnemyDeath").gameObject;
         particle.SetActive(false);
@@ -227,11 +231,16 @@ public abstract class Virus : Enemy
 
     public override void Death()
     {
-        particle.SetActive(true);
+		particle.SetActive(true);
         particle.transform.parent = null;
         if(audio)
             audio.Play();
         Destroy(particle, 3);
-        base.Death();
-    }
+		if (CanAffectTotalNumber)
+		{
+			Base.Instance.ReduceNumEnemy();
+			CanAffectTotalNumber = false;
+		}
+		Destroy(gameObject);
+	}
 }

@@ -15,4 +15,19 @@ public class Virus3 : Virus
 		base.Start();
 		priority = new int[] { -1, 0 };
 	}
+	public override void Death()
+	{
+		particle.SetActive(true);
+		particle.transform.parent = null;
+		if (audio)
+			audio.Play();
+		Destroy(particle, 3);
+		if (CanAffectTotalNumber)
+		{
+			Base.Instance.ReduceNumEnemy();
+			Base.Instance.ReduceNumEnemy();
+			CanAffectTotalNumber = false;
+		}
+		Destroy(gameObject);
+	}
 }

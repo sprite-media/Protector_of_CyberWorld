@@ -47,11 +47,14 @@ public class Virus2 : Virus
 			transform.Translate(Vector3.forward * speed * Time.deltaTime);
 			if (Vector3.Distance(transform.position, target.position) < 1.0f)
 			{
-                Base.Instance.DereaseTheEnemyNum();
                 GameObject temp = (GameObject)Instantiate(virus3, transform.position, transform.rotation);
 				temp.GetComponent<Virus3>().PathType = this.pathType;
 				temp.GetComponent<Virus3>().BackToPath();
                 audio.Play();
+
+				target.GetComponent<Virus1>().CanAffectTotalNumber = false;
+				CanAffectTotalNumber = false;
+
 				Destroy(target.gameObject);
 				Destroy(gameObject);
 			}
@@ -59,11 +62,7 @@ public class Virus2 : Virus
 	}
     public override void Death()
     {
-        particle.SetActive(true);
-        particle.transform.parent = null;
         audio.clip = deathClip;
-        audio.Play();
-        Destroy(particle, 3);
         base.Death();
     }
     private void HasVirus()

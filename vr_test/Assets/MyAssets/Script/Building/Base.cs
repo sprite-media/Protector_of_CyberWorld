@@ -86,7 +86,7 @@ public class Base : PlayerBuilding
 	{
         if (hp <= 0) return;
         base.TakeDamage(amt);
-		Debug.Log("Base left hp is: " + hp);
+		//Debug.Log("Base left hp is: " + hp);
 
         if (!coolTIme)
         {
@@ -105,23 +105,18 @@ public class Base : PlayerBuilding
     public void SetTotalNumEnemy(int num)
 	{
 		numEnemiesLeft = num;
+		Debug.Log(num);
 	}
     
     public int GetTotalNumEnemy()
     {
         return numEnemiesLeft; 
     }
-    
-    public void DereaseTheEnemyNum()
-    {
-        numEnemiesLeft--;
-    }
 
 	// Called when an enemy is dead
 	public void ReduceNumEnemy()
 	{
 		numEnemiesLeft--;
-		Debug.Log("Number of Enenmy Left:" + numEnemiesLeft);
 		//Update indicator
 		if (numEnemiesLeft == 0)
 		{
@@ -133,7 +128,7 @@ public class Base : PlayerBuilding
         }
 	}
 
-    IEnumerator SpawnBossToStage() 
+    IEnumerator SpawnBossToStage()
     {
         yield return new WaitForSeconds(2.0f);
         Boss.Instance.gameObject.SetActive(true);

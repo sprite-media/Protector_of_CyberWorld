@@ -4,6 +4,7 @@ public class EnemyContainer : MonoBehaviour
 {
 	private static GameObject[] enemies;
 	public static GameObject[] Enemies { get { return enemies; } }
+	public GameObject[] en;
 	[SerializeField] string enemyTag;
 
 	private void Awake()
@@ -13,6 +14,7 @@ public class EnemyContainer : MonoBehaviour
 	}
 	private void UpdateEnemyList()
 	{
-		 enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+		enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+		en = enemies;
 	}
 }
