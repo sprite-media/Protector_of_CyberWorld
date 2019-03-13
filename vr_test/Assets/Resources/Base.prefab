@@ -113,7 +113,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: eac3f7ec830cdc84daa12dd7cc4fb950, type: 3}
   - {fileID: 8300000, guid: 8189d7f022bd6294390c04140eedc7f5, type: 3}
   - {fileID: 8300000, guid: 6e70b7b0118a4a143b8180caef15ae8e, type: 3}
-  BassHealthBar: {fileID: 0}
   Health: {fileID: 5721593068531022041}
 --- !u!82 &4794558051501308317
 AudioSource:
@@ -301,7 +300,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3add267ee85d2444e843e59da060eb7e, type: 2}
+  - {fileID: 2100000, guid: 70f5b7fbd10650b428b5bcd1bc18d639, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -391,7 +390,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5de2dd332a72b7442a4482ee185bd541, type: 2}
+  - {fileID: 2100000, guid: 2d7f46eb3825f764d80bc8840f26a7fc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
