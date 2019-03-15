@@ -69,7 +69,7 @@ public class UI_Button : MonoBehaviour
     IEnumerator WaitForStart()
     {
         yield return new WaitForSeconds(3.0f);
-        SceneManager.LoadScene("tempMap");
+        SceneManager.LoadScene("Map");
         GameObject.Find("Player").transform.position = new Vector3(10.0f, 0.01f, 1.0f);
     }
 
