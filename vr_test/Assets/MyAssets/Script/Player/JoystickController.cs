@@ -38,9 +38,6 @@ public class JoystickController : MonoBehaviour
     {
         Vector2 joystickValue = joystickAction.GetAxis(SteamVR_Input_Sources.Any);
 
-        Debug.Log("Left Hand" + teleportAction.GetStateDown(SteamVR_Input_Sources.LeftHand));
-        Debug.Log("Right hand " + teleportAction.GetStateDown(SteamVR_Input_Sources.RightHand));
-
         if (teleportAction.GetStateDown(SteamVR_Input_Sources.Any))
             isTeleporting = true;
 

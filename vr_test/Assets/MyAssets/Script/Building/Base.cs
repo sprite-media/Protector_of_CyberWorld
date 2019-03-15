@@ -105,7 +105,6 @@ public class Base : PlayerBuilding
     public void SetTotalNumEnemy(int num)
 	{
 		numEnemiesLeft = num;
-		Debug.Log(num);
 	}
     
     public int GetTotalNumEnemy()

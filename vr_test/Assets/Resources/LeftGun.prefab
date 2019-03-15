@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 11104100}
   - component: {fileID: 11104102}
   - component: {fileID: 11104101}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 289045912}
   - component: {fileID: 289045913}
   - component: {fileID: 5019207648289550280}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LeftGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -483,7 +483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1205081691}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GunPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

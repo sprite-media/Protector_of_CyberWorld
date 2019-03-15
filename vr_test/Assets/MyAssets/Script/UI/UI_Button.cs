@@ -60,7 +60,6 @@ public class UI_Button : MonoBehaviour
     }
     public void StartGame()
     {
-        Debug.Log("GameStart");
         if (audio)
             audio.Play();
         StartCoroutine("WaitForStart");

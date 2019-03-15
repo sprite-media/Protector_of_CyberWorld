@@ -29,8 +29,8 @@ public class WeaponSpawner : MonoBehaviour
             
             weapon[0] = Resources.Load("LeftGun", typeof(GameObject)) as GameObject;
             weapon[1] = Resources.Load("RightGun", typeof(GameObject)) as GameObject;
-            weapon[2] = Resources.Load("LeftSword", typeof(GameObject)) as GameObject;
-            weapon[3] = Resources.Load("RightSword", typeof(GameObject)) as GameObject;
+            weapon[2] = Resources.Load("LeftSword 1", typeof(GameObject)) as GameObject;
+            weapon[3] = Resources.Load("RightSword 1", typeof(GameObject)) as GameObject;
         }
     }
 

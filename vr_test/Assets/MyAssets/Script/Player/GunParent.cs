@@ -35,7 +35,6 @@ namespace Hyukin
         }
         public void Disappear()
         {
-            Debug.Log("Disappear");
             transform.parent.GetComponent<Rigidbody>().isKinematic = false;
             hand = null;
             //Particle effect
