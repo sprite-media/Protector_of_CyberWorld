@@ -98,7 +98,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 1.16
-      minScalar: 0.18
+      minScalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4615,9 +4615,9 @@ MonoBehaviour:
   LifeTime: 1
   DontDestroyOnHit: 0
   StopOnHit: 1
-  Particle: {fileID: 0}
+  Particle: {fileID: 198000012753252288}
   Model: {fileID: 0}
-  audio: {fileID: 0}
+  audio: {fileID: 82866601260505642}
   Alive: 1
 --- !u!54 &54000011215077958
 Rigidbody:
@@ -4795,7 +4795,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: dabfecc5ba9f9d74da16838b45149199, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.057
   m_Pitch: 0.8
   Loop: 0
   Mute: 0
