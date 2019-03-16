@@ -31,7 +31,7 @@ public class Tower : PlayerBuilding
     // Start is called before the first frame update
     protected void Start()
     {
-		hp = 20.0f;
+		hp = 200.0f;
 		InvokeRepeating("UpdateTarget", 0f, 0.5f); // Inorder to not to call UpdateTarget function in every frame.
         partToRatate = transform.Find("Base");
 		weapons = transform.Find("Base").Find("Turret").GetComponentsInChildren<Weapon>();

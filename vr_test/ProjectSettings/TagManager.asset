@@ -12,6 +12,7 @@ TagManager:
   - FxTemporaire
   - Boss
   - Hand
+  - MovingCam
   layers:
   - Default
   - TransparentFX
