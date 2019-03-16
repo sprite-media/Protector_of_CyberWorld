@@ -8,14 +8,18 @@ namespace Hyukin
         public float effectsDisplayTime = 0.2f; // how long lineRenderer will stay in a scene
         int shootableMask; //enemy or should be shootable
         public AudioSource aud;
-		private static GameObject particle = null;
+		private static GameObject hitParticle = null;
+        private static GameObject flashParticle = null;
 
         private void Start()
         {
             //gunLine = GetComponent<LineRenderer>();
-			if(particle == null)
-				particle = Resources.Load("Particle_LaserHit", typeof(GameObject)) as GameObject;
-		}
+			if(hitParticle == null)
+                hitParticle = Resources.Load("Particle_LaserHit", typeof(GameObject)) as GameObject;
+
+            if (flashParticle == null)
+                flashParticle = Resources.Load("Particle_LaserFlash", typeof(GameObject)) as GameObject;
+        }
 
         public override void Update()
         {
@@ -34,6 +38,8 @@ namespace Hyukin
         protected override void Shoot()
         {
             base.Shoot();
+            GameObject goFlash = (GameObject)Instantiate(flashParticle, transform.position, transform.rotation);
+            Destroy(goFlash, 0.22f);
             aud.Play();
             gunLine.enabled = true;
             Transform shotTransform = transform; 
@@ -62,10 +68,11 @@ namespace Hyukin
 
 		private void InstantiateParticle(RaycastHit hit)
 		{
-			GameObject tempParticle = (GameObject)Instantiate(particle, hit.point, hit.transform.rotation);
+			GameObject tempParticle = (GameObject)Instantiate(hitParticle, hit.point, hit.transform.rotation);
 			tempParticle.transform.LookAt(transform, Vector3.up);
 			tempParticle.SetActive(true);
 			Destroy(tempParticle, 1.4f);
 		}
+
     }
 }
