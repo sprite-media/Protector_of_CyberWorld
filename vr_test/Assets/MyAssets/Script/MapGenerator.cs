@@ -35,7 +35,7 @@ public class MapGenerator : MonoBehaviour
 
 	private void LoadMapData()
 	{
-        /*/
+        //*/
 		TextAsset mapCSV = Resources.Load("test_MapData", typeof(TextAsset)) as TextAsset;
         /*/
         TextAsset mapCSV = Resources.Load("MapData", typeof(TextAsset)) as TextAsset;
