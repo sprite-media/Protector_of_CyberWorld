@@ -12,7 +12,10 @@ namespace Hyukin
         public float reFireTime = 0.15f;
         protected float timer;
 
-        [SerializeField]private Hand hand;
+        protected bool isCharging = false;
+        protected float chargingLaser = 0.0f;
+        protected float minChargingLaser = 2.0f;
+        [SerializeField]protected Hand hand;
 
         public virtual void Update()
         {
@@ -22,10 +25,24 @@ namespace Hyukin
             {
                 Shoot();
             }
+
             if (hand != null && hand.grabPinchAction.GetStateDown(hand.handType))
             {
+                isCharging = true;  
+            }
+
+            if (hand != null && hand.grabPinchAction.GetStateUp(hand.handType))
+            {
+
+                isCharging = false;
                 Shoot();
             }
+
+            if(isCharging)
+            {
+                chargingLaser += Time.deltaTime;
+            }
+
         }
 
         protected virtual void Shoot()

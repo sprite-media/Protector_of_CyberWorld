@@ -5,11 +5,15 @@ namespace Hyukin
     public class RayGun : GunParent
     {
         public LineRenderer gunLine;
+
         public float effectsDisplayTime = 0.2f; // how long lineRenderer will stay in a scene
         int shootableMask; //enemy or should be shootable
         public AudioSource aud;
+
 		private static GameObject hitParticle = null;
         private static GameObject flashParticle = null;
+
+
 
         private void Start()
         {
@@ -38,23 +42,46 @@ namespace Hyukin
         protected override void Shoot()
         {
             base.Shoot();
+
+
+            if (chargingLaser < minChargingLaser && !isCharging)
+            {
+                NormalShoot();
+                chargingLaser = 0.0f;
+            }
+            
+            if(chargingLaser > minChargingLaser && !isCharging)
+            {
+                Debug.Log("Charged Laser Shoot");
+                chargingLaser = 0.0f;
+            }
+          
+        }
+
+        private void ChargingLaser()
+        {
+
+        }
+
+        private void NormalShoot()
+        {
             GameObject goFlash = (GameObject)Instantiate(flashParticle, transform.position, transform.rotation);
             Destroy(goFlash, 0.22f);
             aud.Play();
             gunLine.enabled = true;
-            Transform shotTransform = transform; 
+            Transform shotTransform = transform;
             gunLine.SetPosition(0, shotTransform.position);
-           
+
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, range))
             {
                 gunLine.SetPosition(1, hit.point);
-				InstantiateParticle(hit);
+                InstantiateParticle(hit);
 
-				if (hit.transform.tag == "Enemy")
+                if (hit.transform.tag == "Enemy")
                 {
                     hit.transform.GetComponent<Enemy>().TakeDamage(damage);
-				}
+                }
                 else if (hit.transform.tag == "Boss")
                 {
                     hit.transform.GetComponent<Enemy>().TakeDamage(damage);
