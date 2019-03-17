@@ -9,22 +9,21 @@ public class CameraController : MonoBehaviour
     private float speed;
 
     private bool isRotatableY;
+    private bool isRotatableX;
     private bool isMoveForward;
     private bool isAnyKeyPress;
-    Vector3 angle;
+    public Vector3 angle;
     // Start is called before the first frame update
     void Start()
     {
         dir = 0.0f;
-        rotSpeed = 20.0f;
+        rotSpeed = 5.0f;
         speed = 0.0f;
 
         isRotatableY = false;
+        isRotatableX = false;
         isMoveForward = false;
         isAnyKeyPress = false;
-        angle.y = 180.0f;
-        angle.x = 0;
-        angle.z = 0;
     }
 
     // Update is called once per frame
@@ -47,6 +46,16 @@ public class CameraController : MonoBehaviour
             else
                 speed = 5.0f;
         }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            isMoveForward = isMoveForward ? false : true;
+
+            if (!isMoveForward)
+                speed = 0.0f;
+            else
+                speed = -5.0f;
+        }
     }
 
     void CameraRotation()
@@ -56,7 +65,6 @@ public class CameraController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.A))
         {
-            isAnyKeyPress = true;
             isRotatableY = isRotatableY ? false : true;
             if (!isRotatableY)
                 dir = 0;
@@ -66,7 +74,6 @@ public class CameraController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.D))
         {
-            isAnyKeyPress = true;
             isRotatableY = isRotatableY ? false : true;
             if (!isRotatableY)
                 dir = 0;
@@ -74,7 +81,28 @@ public class CameraController : MonoBehaviour
                 dir = 1;
         }
 
-        if(isAnyKeyPress)
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            isRotatableX = isRotatableX ? false : true;
+            if (!isRotatableX)
+                dir = 0;
+            else
+                dir = 1;
+        }
+
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            isRotatableX = isRotatableX ? false : true;
+            if (!isRotatableX)
+                dir = 0;
+            else
+                dir = -1;
+        }
+
+        if (isRotatableY)
             angle.y += (rotSpeed * dir) * Time.deltaTime;
+
+        if (isRotatableX)
+            angle.x += (rotSpeed * dir) * Time.deltaTime;
     }
 }
