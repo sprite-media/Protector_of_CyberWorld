@@ -5,7 +5,7 @@ public class Virus1 : Virus
 	private new void Awake()
 	{
 		base.Awake();
-		hp = 3.0f;
+		hp = 0.7f;
         damage = 1.0f;
 	}
 

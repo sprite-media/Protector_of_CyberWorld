@@ -90,8 +90,8 @@ public class Base : PlayerBuilding
 
         if (!coolTIme)
         {
-            audio.clip = clips[2];
-            audio.Play();
+            //audio.clip = clips[2];
+            //audio.Play();
             coolTIme = true;
             StartCoroutine("AudioCoolTime");
         }

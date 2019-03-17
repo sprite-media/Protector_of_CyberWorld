@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateActionSetOnAttach:
     actionSetPath: 
-  hideHandOnAttach: 0
+  hideHandOnAttach: 1
   hideSkeletonOnAttach: 0
   hideControllerOnAttach: 0
   handAnimationOnPickup: 0
@@ -172,10 +172,10 @@ BoxCollider:
   m_GameObject: {fileID: 2942650189284621717}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.59493405, y: 0.40581846, z: 1.8856016}
-  m_Center: {x: -0.0031645477, y: 0.046740744, z: 0.20862082}
+  m_Size: {x: 0.8741911, y: 0.7807821, z: 1.4435341}
+  m_Center: {x: 0.0043022907, y: 0.05503713, z: 0.19838105}
 --- !u!114 &1344384844021107234
 MonoBehaviour:
   m_ObjectHideFlags: 0

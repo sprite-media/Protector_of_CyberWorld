@@ -35,9 +35,9 @@ public abstract class Virus : Enemy
     protected GameObject particle = null;
 
     public float Power { get { return damage; } }
-    protected float detectRange = 1.5f;
+    protected float detectRange = 20.0f;
     protected float attackRange = 1.0f;
-    protected float speed = 3.0f;
+    protected float speed = 0.5f;
 
 	public bool CanAffectTotalNumber { get; set; }
 
