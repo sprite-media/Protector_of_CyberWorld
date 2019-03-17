@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunParent : MonoBehaviour
 {
-    public int damage = 1;
+    public float damage = 1;
     public float range = 100f;
 
     public float reFireTime = 0.15f;

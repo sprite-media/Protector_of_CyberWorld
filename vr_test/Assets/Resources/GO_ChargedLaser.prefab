@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4000012934592400}
   - component: {fileID: 198000011825544546}
   - component: {fileID: 199000010906620490}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: _P
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1000010700682540}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 4000014207054332}
   m_RootOrder: 0
@@ -4635,11 +4635,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000014207054332}
-  - component: {fileID: 114000011379593360}
   - component: {fileID: 54000011215077958}
   - component: {fileID: 135000012859705688}
-  - component: {fileID: 1220883928651056908}
-  m_Layer: 8
+  - component: {fileID: 5068407657340293140}
+  m_Layer: 10
   m_Name: GO_ChargedLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4663,26 +4662,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114000011379593360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000010732017690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 512b8673106f2a14491c9e7ae622ed7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damegeType: 4
-  LifeTime: 3
-  DontDestroyOnHit: 0
-  StopOnHit: 0
-  Particle: {fileID: 198000011825544546}
-  Model: {fileID: 4000013926224206}
-  audio: {fileID: 82319091796760648}
-  Alive: 1
 --- !u!54 &54000011215077958
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4710,9 +4689,9 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1220883928651056908
+--- !u!114 &5068407657340293140
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4721,9 +4700,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000010732017690}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c6922cfed0f56541b7bdb9df5111055, type: 3}
+  m_Script: {fileID: 11500000, guid: 109cd8af32e8ae04ca1bbc9136b58dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
+  particle: {fileID: 1000010700682540}
+  model: {fileID: 4000013926224206}
+  aud: {fileID: 82319091796760648}
 --- !u!1 &1000014211410966
 GameObject:
   m_ObjectHideFlags: 0
@@ -4735,7 +4718,7 @@ GameObject:
   - component: {fileID: 4000013926224206}
   - component: {fileID: 198000012842155590}
   - component: {fileID: 199000013536728288}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: _mp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9360,7 +9343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4048258166070980}
   - component: {fileID: 82319091796760648}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: _a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
