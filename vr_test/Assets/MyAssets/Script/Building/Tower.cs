@@ -148,7 +148,7 @@ public class Tower : PlayerBuilding
 		bool once = false;
 		while(dropIndex < numIteration)
 		{
-			//*/
+			/*/
 			if (!once)
 			{
 				GameObject particle = (GameObject)Instantiate(DeathEffect, DeathEffect.transform.position, DeathEffect.transform.rotation);
