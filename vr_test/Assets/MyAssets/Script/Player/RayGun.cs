@@ -41,11 +41,16 @@ public class RayGun : GunParent
         if (isCharging)
         {
             chargingLaser += Time.deltaTime;
+            damage += (damage + (chargingLaser * 2.0f));
             GameObject goCharingLaserParticle = (GameObject)Instantiate(ChargingLaserParticle, transform.position, transform.rotation);
-            Destroy(goCharingLaserParticle, 0.1f);
+            Destroy(goCharingLaserParticle, 0.2f);
         }
         else
+        {
             chargingLaser = 0.0f;
+            damage = 1.0f;
+        }
+     
     }
 
     public void DisableEffects()
@@ -73,6 +78,7 @@ public class RayGun : GunParent
     private void ChargedLaserShoot()
     {
         GameObject goChargedLaser = (GameObject)Instantiate(ChargedLaser, transform.position, transform.rotation);
+        goChargedLaser.GetComponent<Bullet>().damage = damage;
     }
 
     private void NormalShoot()
