@@ -916,7 +916,9 @@ MonoBehaviour:
   audio: {fileID: 3327445390389063010}
   DeathEffect: {fileID: 2643499355351521025}
   number: 0
+  towerType: 2
   lookUp: 0
+  part: {fileID: 4360211625015470431, guid: f8896760863a5484c9ac2c5078623a9b, type: 3}
   deathClip: {fileID: 8300000, guid: 24b60a7be32244a4b8fcb98273c43969, type: 3}
   range: 5
   turnSpeed: 10
