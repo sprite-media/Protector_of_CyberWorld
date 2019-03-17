@@ -2,49 +2,59 @@
 using Valve.VR.InteractionSystem;
 using UnityEngine;
 
-namespace Hyukin
+public class GunParent : MonoBehaviour
 {
-    public class GunParent : MonoBehaviour
+    public float damage = 1;
+    public float range = 100f;
+
+    public float reFireTime = 0.15f;
+    protected float timer;
+
+    //Charging Laser
+    protected bool isCharging = false;
+    protected float chargingLaser = 0.0f;
+    protected float minChargingLaser = 1.0f;
+
+    [SerializeField] protected Hand hand;
+
+    public virtual void Update()
     {
-        public int damage = 1;
-        public float range = 100f;
+        timer += Time.deltaTime;
 
-        public float reFireTime = 0.15f;
-        protected float timer;
-
-        [SerializeField]private Hand hand;
-
-        public virtual void Update()
+        if (Input.GetButton("Fire1") && timer >= reFireTime) //for now
         {
-            timer += Time.deltaTime;
-
-            if (Input.GetButton("Fire1") && timer >= reFireTime) //for now
-            {
-                Shoot();
-            }
-            if (hand != null && hand.grabPinchAction.GetStateDown(hand.handType))
-            {
-                Shoot();
-            }
+            Shoot();
         }
 
-        protected virtual void Shoot()
+        if (hand != null && hand.grabPinchAction.GetStateDown(hand.handType))
         {
-            //Debug.Log("Bang!");
-            timer = 0;
+            isCharging = true;
         }
-        public void Disappear()
+
+        if (hand != null && hand.grabPinchAction.GetStateUp(hand.handType))
         {
-            transform.parent.GetComponent<Rigidbody>().isKinematic = false;
-            hand = null;
-            //Particle effect
-            //Destroy(transform.parent.gameObject);
-        }
-        public void Grabbed()
-        {
-            hand = transform.parent.parent.GetComponent<Hand>();
-            transform.parent.GetComponent<Rigidbody>().useGravity = true;
+            Shoot();
+            isCharging = false;
         }
 
     }
+
+    protected virtual void Shoot()
+    {
+        //Debug.Log("Bang!");
+        timer = 0;
+    }
+    public void Disappear()
+    {
+        transform.parent.GetComponent<Rigidbody>().isKinematic = false;
+        hand = null;
+        //Particle effect
+        //Destroy(transform.parent.gameObject);
+    }
+    public void Grabbed()
+    {
+        hand = transform.parent.parent.GetComponent<Hand>();
+        transform.parent.GetComponent<Rigidbody>().useGravity = true;
+    }
+
 }

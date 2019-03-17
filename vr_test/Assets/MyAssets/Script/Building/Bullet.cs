@@ -4,38 +4,29 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Transform target;
-    public float speed = 70f;
-
-    public void Seek (Transform _target)
-    {
-        target = _target;
+    private float speed;
+    public float damage;
+    public GameObject particle;
+    public Transform model;
+    public AudioSource aud;
+    private void Start()
+    {        
+        speed = 20.0f;
     }
 
     void Update()
     {
-        if(target == null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Vector3 dir = target.position - transform.position;
-        float distanceThisFrame = speed * Time.deltaTime;
-
-        if(dir.magnitude <= distanceThisFrame)
-        {
-            HitTarget();
-            return;
-        }
-
-        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-    void HitTarget()
+    private void OnCollisionEnter(Collision col)
     {
-        target.GetComponent<Virus1>().TakeDamage(3);
-        Destroy(gameObject);
+        if(col.transform.tag == "Enemy" || col.transform.tag == "Boss")
+        {
+            GameObject goParticle = (GameObject)Instantiate(particle, col.transform.position, col.transform.rotation);
+            col.transform.GetComponent<Enemy>().TakeDamage(damage);
+            model.gameObject.SetActive(false);
+            Destroy(gameObject,0.2f);
+        }
     }
-
 }

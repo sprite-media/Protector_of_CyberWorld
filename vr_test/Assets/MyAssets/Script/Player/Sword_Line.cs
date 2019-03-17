@@ -56,15 +56,23 @@ public class Sword_Line : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(transform.position, transform.forward, out hit, range, 1))
         {
-            Debug.Log("Hit");
-            InstantiateParticle(hit);
+            //Only instantiate particle for ground
+            float dist = Vector3.Distance(hit.point, transform.position);
 
             if (hit.transform.tag == "Enemy" && isColliderable)
             {
                 //aud.Play();
+                InstantiateParticle(hit);
                 hit.transform.GetComponent<Enemy>().TakeDamage(damage);
                 attackCount = 0.0f;
             }
+            else if (dist < range / 2.0f)
+            {
+                InstantiateParticle(hit);
+            }
+
+          
+          
         }
     }
 
