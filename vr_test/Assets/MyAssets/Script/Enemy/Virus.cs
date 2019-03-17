@@ -142,7 +142,7 @@ public abstract class Virus : Enemy
             {
                 for (int i = 0; i < TargetList[j].Length; i++)
                 {
-                    if (TargetList[j][i] != null && TargetList[j][i].tag != "Destroyed")
+                    if (TargetList[j][i] != null)
                     {
                         if (Vector3.Distance(transform.position, TargetList[j][i].transform.position) <= detectRange)
                         {
@@ -223,7 +223,7 @@ public abstract class Virus : Enemy
     {
         Vector3 temp = new Vector3(targetBuildingPos.x, transform.position.y, targetBuildingPos.z);
         transform.LookAt(temp);
-        if (targetBuilding == null || targetBuilding.tag == "Destroyed")
+        if (targetBuilding == null)
         {
             BackToPath();
         }

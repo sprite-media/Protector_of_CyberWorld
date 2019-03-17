@@ -38,7 +38,7 @@ public class MapGenerator : MonoBehaviour
         //*/
 		TextAsset mapCSV = Resources.Load("test_MapData", typeof(TextAsset)) as TextAsset;
         /*/
-        TextAsset mapCSV = Resources.Load("tempMap", typeof(TextAsset)) as TextAsset;
+        TextAsset mapCSV = Resources.Load("MapData", typeof(TextAsset)) as TextAsset;
         //*/
         string[] column = mapCSV.text.Split('\n');
 		string[] row = column[0].Split(',');

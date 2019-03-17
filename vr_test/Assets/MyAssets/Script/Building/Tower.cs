@@ -4,25 +4,10 @@ using MoenenGames.VoxelRobot;
 
 public class Tower : PlayerBuilding
 {
-	public enum Type
-	{
-		None,
-		Tower1,
-		Tower2
-	}
-	public Type towerType;
-    [SerializeField]
-	private bool lookUp;
-	private Weapon[] weapons = null;
-	[SerializeField]
-	private GameObject part;
-	private int dropIndex = 0;
-	private float partialDestructionDamage;
-	private const float MAX_HP = 20.0f;
-
-	[SerializeField]
-	private AudioClip deathClip;
-	public AudioSource aud { get { return audio; } }
+    [SerializeField] bool lookUp;
+	Weapon[] weapons = null;
+    public AudioSource aud { get { return audio; } }
+    [SerializeField] AudioClip deathClip;
     
     protected Transform target;
 
@@ -46,22 +31,16 @@ public class Tower : PlayerBuilding
     // Start is called before the first frame update
     protected void Start()
     {
-		hp = MAX_HP;
+		hp = 20.0f;
 		InvokeRepeating("UpdateTarget", 0f, 0.5f); // Inorder to not to call UpdateTarget function in every frame.
         partToRatate = transform.Find("Base");
 		weapons = transform.Find("Base").Find("Turret").GetComponentsInChildren<Weapon>();
-
-		partialDestructionDamage = MAX_HP / (float)weapons.Length;
     }
 
+    // Update is called once per frame
     public void Update()
     {
-		if (Base.Instance.GetTotalNumEnemy() <= 0)
-		{
-			target = null;
-		}
-
-		if (target == null)
+			if (target == null)
 				return;
 
 			Vector3 dir = target.position - transform.position;
@@ -77,6 +56,11 @@ public class Tower : PlayerBuilding
         }		
         else //tower2
             partToRatate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+
+        if (Base.Instance.GetTotalNumEnemy() <= 0)
+        {
+            target = null;
+        }
     }
 	public virtual void Shoot()
 	{
@@ -124,58 +108,16 @@ public class Tower : PlayerBuilding
             target = null;
         }
     }
-	public bool Repair()
-	{
-		if (dropIndex > 0)
-		{
-			dropIndex--;
-			hp = Mathf.Clamp(hp + partialDestructionDamage, 0, MAX_HP);
-			weapons[dropIndex].gameObject.SetActive(true);
-			gameObject.tag = "Tower";
-
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	public override void TakeDamage(float amt)
-	{
-		base.TakeDamage(amt);
-
-		int numIteration = (int)((MAX_HP - hp) / partialDestructionDamage);
-		bool once = false;
-		while(dropIndex < numIteration)
-		{
-			//*/
-			if (!once)
-			{
-				GameObject particle = (GameObject)Instantiate(DeathEffect, DeathEffect.transform.position, DeathEffect.transform.rotation);
-				particle.SetActive(true);
-				Destroy(particle, 1.5f);
-				once = true;
-			}
-			//*/
-			GameObject temp = (GameObject)Instantiate(part, weapons[dropIndex].transform.position, weapons[dropIndex].transform.rotation);
-			temp.GetComponent<TowerPart>().TurnOnTypeTimer((TowerPart.Type)this.towerType, 1.5f);
-			weapons[dropIndex].gameObject.SetActive(false);
-			dropIndex++;
-		}
-	}
 	public override void Death()
 	{
         base.Death();
-		/*/
         if (DeathEffect)
         {
             DeathEffect.SetActive(true);
             DeathEffect.transform.parent = null;
             Destroy(DeathEffect, 1.5f);
         }
-		//Destroy(gameObject);
-		//*/
-		gameObject.tag = "Destroyed";
+        Destroy(gameObject);
     }
 
 }

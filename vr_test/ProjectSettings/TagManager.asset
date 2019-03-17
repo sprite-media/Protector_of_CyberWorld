@@ -5,7 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Tower
-  - Part
+  - Trap
+  - Enemy
+  - Base
+  - projectile
+  - FxTemporaire
+  - Boss
+  - Hand
+  - MovingCam
   layers:
   - Default
   - TransparentFX
@@ -15,9 +22,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - PostProcessing
+  - Grab
+  - Bullet
   - 
   - 
   - 
