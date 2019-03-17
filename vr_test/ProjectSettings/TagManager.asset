@@ -12,6 +12,8 @@ TagManager:
   - FxTemporaire
   - Boss
   - Hand
+  - Part
+  - Destroyed
   layers:
   - Default
   - TransparentFX
