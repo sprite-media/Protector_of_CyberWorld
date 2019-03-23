@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
@@ -12,13 +11,17 @@ public class Sword_Line : MonoBehaviour
     private Hand hand = null;
     private bool grabed = false;
 
-    public AudioSource aud;
     private static GameObject particle = null;
 
     private bool isColliderable = false;
     private float attackRate = 0.2f;
     private float attackCount;
 
+    public AudioSource aud;
+    private float soundRate = 1.0f;
+    private float soundCount = 1.0f;
+
+    float velocity = 0.0f;
     void Awake()
     {
         attackCount = attackRate;
@@ -32,7 +35,39 @@ public class Sword_Line : MonoBehaviour
         {
             AttackCooltime();
             Attack();
-        }  
+            StartCoroutine(CalculateVelocity());
+            SwingSound();
+        }
+
+    }
+
+    IEnumerator CalculateVelocity()
+    {
+        Vector3 x1 = transform.position;
+        float t1 = 0;
+
+        yield return new WaitForSeconds(0.05f);
+
+        Vector3 x2 = transform.position;
+        float t2 = 1;
+
+        float distance = Vector3.Distance(x2, x1);
+        velocity = distance / (t2 - t1);
+    }
+
+    public void SwingSound()
+    {       
+
+        if (aud != null && soundCount > soundRate && velocity > 0.05f)
+        {
+            soundCount = 0.0f;
+            velocity = 0.0f;
+            aud.Play();
+        }
+        else
+        {
+            soundCount += Time.deltaTime;
+        }
     }
 
     public void Grabbed()
@@ -41,6 +76,8 @@ public class Sword_Line : MonoBehaviour
         transform.parent.GetComponent<Rigidbody>().useGravity = true;
         grabed = true;
     }
+
+
 
     public void Disappear()
     {
@@ -69,9 +106,7 @@ public class Sword_Line : MonoBehaviour
             else if (dist < range / 2.0f)
             {
                 InstantiateParticle(hit);
-            }
-
-          
+            }      
           
         }
     }
