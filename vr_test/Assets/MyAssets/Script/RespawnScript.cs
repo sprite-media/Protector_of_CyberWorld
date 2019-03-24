@@ -8,7 +8,7 @@ public class RespawnScript : MonoBehaviour
 	private int enemyType = 0;
 
 	private int maxEnmey; //max number of enemies per spawner
-	private int[] maxVirus = {3, 2 };
+	private int[] maxVirus = {1, 1 };
 	private int numOfEnemy = 0; // number of spawned enemies
     public float minSpawnTime = 5.0f;
     public float maxSpawnTime = 10.0f;

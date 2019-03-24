@@ -27,12 +27,21 @@ public class Boss : Enemy
         IDLE,
         MOVE_F,
         HIT,
-        ATTACK_C //C stands for close
+        ATTACK_C, //C stands for close
+        JUMP
     }
     [SerializeField] STATE curState = STATE.IDLE;
     [SerializeField] Transform curTarget = null;
     bool isDead = false;
     bool isDeadUsed = false;
+
+    bool isJumping = false;
+    float jumpingSpeed;
+    bool isLanding = false;
+
+    bool boolJumpTimer = false;
+    float jumpDelay = 10.0f;
+    float curJumpDelay = 0.0f;
     #endregion
 
     //attack type string
@@ -71,6 +80,10 @@ public class Boss : Enemy
         if (isDead) return;
         StateSelector();
         curTime += 0.1f;
+        if(boolJumpTimer)
+        {
+            curJumpDelay += 0.1f;
+        }     
     }
 
     private void StateSelector()
@@ -100,12 +113,53 @@ public class Boss : Enemy
                     CloseRangeAttack();
                 }
                 break;
+            case STATE.JUMP:
+                JumpToAnotherTarget();
+                break;
             default:
                 break;
         }
     }
 
     #region Action funtions
+
+    private void JumpToAnotherTarget()
+    {
+        if (!isLanding)
+        {
+            if (!isJumping)
+            {
+                PickTheTarget();
+                isJumping = true;
+            }
+
+            if(isJumping)
+            {
+                animator.SetBool("Fly", isJumping);
+                var quaternion = Quaternion.LookRotation(targetList[targetList.Count - 1].transform.position - transform.position);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, quaternion, rotateSpeed * Time.deltaTime);
+            }
+        }
+    }
+
+    public void StartLanding()
+    {
+        transform.position = targetList[Random.Range(0, targetList.Count)].transform.position;
+        isJumping = false;
+        animator.SetBool("Fly", isJumping);
+        isLanding = true;
+        animator.SetBool("Land", isLanding);
+    }
+
+    public void EndLanding()
+    {
+        isLanding = false;
+        animator.SetBool("Land", isLanding);
+        PickTheTarget();
+        curState = STATE.IDLE;
+        curJumpDelay = 0.0f;
+    }
+
     private void Move_F()
     {
         float targetDistance = Vector3.Distance(transform.position, curTarget.position);
@@ -113,10 +167,11 @@ public class Boss : Enemy
         var quaternion = Quaternion.LookRotation(temp - transform.position);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, quaternion, rotateSpeed * Time.deltaTime); // make roation first
 
-        if(targetDistance > slowingDistance) //increase the speed
+
+        if (targetDistance > slowingDistance) //increase the speed
         {
             animator.SetBool("Move Forward Fast", true);
-            if(curSpeed < maxSpeed)         
+            if (curSpeed < maxSpeed)
             {
                 if (curSpeed <= 0)
                 {
@@ -126,7 +181,7 @@ public class Boss : Enemy
                 curSpeed += incrementSpeed;
                 if (curSpeed > maxSpeed)
                     curSpeed = maxSpeed;
-            }         
+            }
         }
         else
         {
@@ -135,6 +190,7 @@ public class Boss : Enemy
                 animator.SetBool("Move Forward Fast", false);
                 curSpeed = 0;
                 curState = STATE.ATTACK_C;
+                boolJumpTimer = true;
                 return;
             }
             if (curSpeed < minSpeed) //slowing Area
@@ -143,12 +199,18 @@ public class Boss : Enemy
                 curSpeed -= 0.001f;
         }
         transform.Translate(Vector3.forward * curSpeed * Time.deltaTime); //Move forward
+     
     }
 
     private void CloseRangeAttack()
     {
         int attackIndex = Random.Range(0, 4);
         animator.SetBool(attackTypeString[attackIndex], true);
+
+        if(targetList.Count > 1 && curJumpDelay >= jumpDelay)
+        {
+            curState = STATE.JUMP;
+        }
     }
     public void AttackApply(AnimationEvent animationEvent)
     {
@@ -157,6 +219,7 @@ public class Boss : Enemy
 
     private void GetHit()
     {
+        if (isJumping || isLanding) return;
         animator.SetBool("Take Damage", true);
     }
     public void BackToIdleFromHiState(AnimationEvent animationEvent)

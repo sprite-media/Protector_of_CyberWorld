@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0db946e0f5304144fa4787eb8a8a5f79
+guid: 8ba8cf2011e96c94b9f087b5ae5927da
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -117,7 +117,7 @@ ModelImporter:
     3300000: Crown
     4300000: Polygonal Alien Telekinis
     4300002: Crown
-    7400000: Fly Away
+    7400000: Spawn From Sky
     9500000: //RootNode
     13700000: Polygonal Alien Telekinis
   externalObjects: {}
@@ -149,10 +149,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Fly Away
+      name: Spawn From Sky
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 30
+      lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -172,8 +172,8 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.8900383
-        functionName: StartLanding
+      - time: 0.95
+        functionName: EndLanding
         data: 
         objectReferenceParameter: {fileID: 1097663671, guid: e38cf75484071e1488d3284d8a7c80ce,
           type: 3}
@@ -183,7 +183,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 29
+      additiveReferencePoseFrame: 38
     isReadable: 1
   meshes:
     lODScreenPercentages: []
