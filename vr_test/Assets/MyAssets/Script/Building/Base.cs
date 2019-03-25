@@ -105,6 +105,7 @@ public class Base : PlayerBuilding
     public void SetTotalNumEnemy(int num)
 	{
 		numEnemiesLeft = num;
+		HUD_NumEnemy.instance.UpdateNumEnemy(numEnemiesLeft);
 	}
     
     public int GetTotalNumEnemy()
@@ -117,6 +118,7 @@ public class Base : PlayerBuilding
 	{
 		numEnemiesLeft--;
 		//Update indicator
+		HUD_NumEnemy.instance.UpdateNumEnemy(numEnemiesLeft);
 		if (numEnemiesLeft == 0)
 		{
 			GameObject.Find("Base").GetComponent<Base>().Win();

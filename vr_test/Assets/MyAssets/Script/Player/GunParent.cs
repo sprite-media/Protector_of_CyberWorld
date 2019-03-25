@@ -21,12 +21,17 @@ public class GunParent : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && timer >= reFireTime) //for now
+        if (Input.GetButtonDown("Fire1")) //for now
         {
-            Shoot();
+			isCharging = true;
         }
+		else if(Input.GetButtonUp("Fire1")) //for now
+		{
+			Shoot();
+			isCharging = false;
+		}
 
-        if (hand != null && hand.grabPinchAction.GetStateDown(hand.handType))
+		if (hand != null && hand.grabPinchAction.GetStateDown(hand.handType))
         {
             isCharging = true;
         }
