@@ -114,9 +114,11 @@ public class MapGenerator : MonoBehaviour
 					}
 					case 5://Spawner
 					{
-						/*Transform adjustment if needed
-						temp.transform.position = new Vector3(temp.transform.position.x, VALUE YOU WANT, temp.transform.position.z);
-						//*/
+                            /*Transform adjustment if needed
+                            temp.transform.position = new Vector3(temp.transform.position.x, VALUE YOU WANT, temp.transform.position.z);
+                            //*/
+                            //temp.gameObject.SetActive(false);
+                            temp.transform.parent = null;
 						break;
 					}
 					case 6://Grenade Tower

@@ -125,7 +125,7 @@ public class Base : PlayerBuilding
 		}
         else if(numEnemiesLeft == 1)
         {
-            StartCoroutine(SpawnBossToStage());
+           // StartCoroutine(SpawnBossToStage());
         }
 	}
 

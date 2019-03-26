@@ -20,7 +20,7 @@ public class PlayerBuilding : MonoBehaviour
 	}
     public virtual void Death()
     {
-        Boss.Instance.UpdateTargetList(number);
+       // Boss.Instance.UpdateTargetList(number);
         audio.Play();
     }
 }
