@@ -194,7 +194,9 @@
 			}
 			if (damegeType == DamageType.Explosive)
 			{
-				Particle.Play();
+                transform.Find("_e").GetComponent<explosion>().on = true;
+                transform.Find("_e").GetComponent<explosion>().damage = Damage;
+                Particle.Play();
                 if (audio)
                     audio.Play();
 			}

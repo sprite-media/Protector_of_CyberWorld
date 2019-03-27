@@ -82,6 +82,7 @@ public class MapGenerator : MonoBehaviour
 					}
 					case 3://Tower
 					{
+                        temp.transform.parent = null;
 						//*Transform adjustment if needed
 						temp.transform.position = new Vector3(temp.transform.position.x, -0.5f, temp.transform.position.z);
 						//*/
@@ -123,6 +124,7 @@ public class MapGenerator : MonoBehaviour
 					}
 					case 6://Grenade Tower
 					{
+                        temp.transform.parent = null;
 						//*Transform adjustment if needed
 						temp.transform.position = new Vector3(temp.transform.position.x, -0.5f, temp.transform.position.z);
 						//*/
