@@ -3,6 +3,9 @@
 public class RayGun : GunParent
 {
     public LineRenderer gunLine;
+    public LineRenderer uiLine;
+
+    private UI_Button hover = null;
 
     public float effectsDisplayTime = 0.2f; // how long lineRenderer will stay in a scene
     int shootableMask; //enemy or should be shootable
@@ -50,7 +53,29 @@ public class RayGun : GunParent
             chargingLaser = 0.0f;
             damage = 1.0f;
         }
-     
+
+        if (Time.deltaTime == 0)
+        {
+            uiLine.enabled = true;
+
+            uiLine.SetPosition(0, transform.position);
+
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, range, 1 << 11))
+            {
+                uiLine.SetPosition(1, hit.point);
+                hover = hit.transform.GetComponent<UI_Button>();
+                hover.RunFunction();
+                //InstantiateParticle(hit);
+            }
+            else
+            {
+                if(hover)
+                    hover.ExitHover();
+                hover = null;
+                uiLine.SetPosition(1, transform.position + transform.forward * range);
+            }
+        }
     }
 
     public void DisableEffects()
@@ -62,15 +87,21 @@ public class RayGun : GunParent
     {
         base.Shoot();
 
-
-        if (chargingLaser < minChargingLaser && isCharging)
+        if (isCharging)
         {
-            NormalShoot();
+            if (chargingLaser < minChargingLaser)
+            {
+                NormalShoot();
+            }
+
+            if (chargingLaser > minChargingLaser)
+            {
+                ChargedLaserShoot();
+            }
         }
-
-        if (chargingLaser > minChargingLaser && isCharging)
+        else
         {
-            ChargedLaserShoot();
+            UIShoot();
         }
 
     }
@@ -80,7 +111,31 @@ public class RayGun : GunParent
         GameObject goChargedLaser = (GameObject)Instantiate(ChargedLaser, transform.position, transform.rotation);
         goChargedLaser.GetComponent<Bullet>().damage = damage;
     }
+    private void UIShoot()
+    {
+        //FlashLight
+        GameObject goFlash = (GameObject)Instantiate(flashParticle, transform.position, transform.rotation);
+        Destroy(goFlash, 0.22f);
 
+
+        aud.Play();
+        gunLine.enabled = true;
+        Transform shotTransform = transform;
+        gunLine.SetPosition(0, shotTransform.position);
+
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, range, 1<<5))
+        {
+            gunLine.SetPosition(1, hit.point);
+            InstantiateParticle(hit);
+
+            hit.transform.GetComponent<UI_Button>().RunFunction();
+        }
+        else
+        {
+            gunLine.SetPosition(1, shotTransform.position + shotTransform.forward * range);
+        }
+    }
     private void NormalShoot()
     {
         //FlashLight

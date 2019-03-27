@@ -65,6 +65,8 @@ public class Base : PlayerBuilding
 
         audio.clip = clips[0];
         audio.Play();
+
+        Time.timeScale = 0;
     }
 	public override void Death()
 	{
@@ -77,7 +79,7 @@ public class Base : PlayerBuilding
 
         audio.clip = clips[1];
         audio.Play();
-
+        Time.timeScale = 0;
         base.Death();
     }
 

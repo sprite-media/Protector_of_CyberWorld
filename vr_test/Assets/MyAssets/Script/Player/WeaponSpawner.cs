@@ -38,7 +38,7 @@ public class WeaponSpawner : MonoBehaviour
     {
         if(spawnedWeapon == null)
         {
-            spawnTimer += Time.deltaTime;
+            spawnTimer += Time.unscaledDeltaTime;
 
             if(spawnTimer >= spawnCoolTime)
             {
