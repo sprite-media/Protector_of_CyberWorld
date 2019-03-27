@@ -24,7 +24,7 @@ public class whiteout : MonoBehaviour
         if (start)
         {
             alpha += speed * multiplier * Time.unscaledDeltaTime;
-            Debug.Log(alpha);
+
             if (alpha >= 1.0f)
             {
                 alpha = 1.0f;
