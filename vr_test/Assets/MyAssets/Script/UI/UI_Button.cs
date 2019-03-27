@@ -20,6 +20,11 @@ public class UI_Button : MonoBehaviour
 
     public Button ButtonType;
 
+    public void Update()
+    {
+        Debug.Log("AAA");
+    }
+
     public void HoverOnButton()
     {
         //Visual
@@ -110,13 +115,35 @@ public class UI_Button : MonoBehaviour
         {
             switch ((int)ButtonType)
             {
+                case (int)Button.MainMenu:
+                    GoTomainMenu();
+                    break;
+                case (int)Button.Resume:
+                    Exit();
+                    break;
+                case (int)Button.Exit:
+                    Resume();
+                    break;
                 case (int)Button.Start:
                     StartGame();
                     break;
-
+                case (int)Button.Hovering:
+                    HoverOnButton();
+                    break;
             }
         }
     }
-
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.tag == "Hand")
+        {
+            switch ((int)ButtonType)
+            {
+                case (int)Button.Hovering:
+                    ExitHover();
+                    break;
+            }
+        }
+    }
     //*/
 }
