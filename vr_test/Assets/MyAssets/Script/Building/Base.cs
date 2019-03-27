@@ -31,6 +31,24 @@ public class Base : PlayerBuilding
     }
     #endregion
 
+    GameObject boss;
+    private void Start()
+    {
+        boss = Boss.Instance.gameObject;
+    }
+
+    public void SetBossOnAgain()
+    {
+        Debug.Log("will bOss set on?");
+        StartCoroutine("SetOnBossWhileJumping");
+    }
+
+    IEnumerator SetOnBossWhileJumping()
+    {
+        yield return new WaitForSeconds(3.0f);
+        Boss.Instance.LandingReset();
+    }
+
     private void Awake()
 	{
         instance = this;

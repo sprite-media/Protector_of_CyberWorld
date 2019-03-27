@@ -11,7 +11,7 @@ public class Virus2 : Virus
 	private new void Awake()
 	{
 		base.Awake();
-		hp = 3.0f;
+		hp = 0.1f;
         damage = 1.0f;
 		speed = 5.0f;
 		virusDetectRange = 6.0f;

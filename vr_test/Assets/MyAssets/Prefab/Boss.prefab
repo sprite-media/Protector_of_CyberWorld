@@ -967,12 +967,18 @@ MonoBehaviour:
   maxSpeed: 10
   minSpeed: 3
   incrementSpeed: 0.1
-  slowingDistance: 20
-  stoppingDistance: 10
+  slowingDistance: 15
+  stoppingDistance: 7
   curSpeed: 0
   rotateSpeed: 90
+  aim: {fileID: 1645448839438157215}
+  FlyingParticle: {fileID: 8606338892058449688, guid: d70735d7a4cf81447b15041142e8c785,
+    type: 3}
+  LandingParticle: {fileID: 2445239696545965524, guid: ddc2ceb1d19c3a549878947fc6a88c2d,
+    type: 3}
   curState: 0
   curTarget: {fileID: 0}
+  isJumping: 0
   targetList: []
 --- !u!1 &1106421116
 GameObject:
@@ -1906,7 +1912,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1645448839438157212
 Transform:
   m_ObjectHideFlags: 0

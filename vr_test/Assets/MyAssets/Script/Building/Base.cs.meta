@@ -3,7 +3,10 @@ guid: 970b0f1d091cd364da42a79f971b5c3f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - audio: {instanceID: 0}
+  - DeathEffect: {instanceID: 0}
+  - boss: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -8,6 +8,9 @@ public class Boss : Enemy
 
     float closeRangeAttackSpeed = 7.0f;
     float curTime = 0.0f;
+
+    float jumpTimer = 20f;
+    float curJumpTimer = 0.0f;
     #endregion
 
     #region movement related variables
@@ -21,13 +24,17 @@ public class Boss : Enemy
     [SerializeField] GameObject aim;
     #endregion
 
+    [SerializeField] GameObject FlyingParticle;
+    [SerializeField] GameObject LandingParticle;
+
     #region State related variables and Enum
     private enum STATE //planning to add more State
     {
         IDLE,
         MOVE_F,
         HIT,
-        ATTACK_C //C stands for close
+        ATTACK_C, //C stands for close
+        JUMP
     }
     [SerializeField] STATE curState = STATE.IDLE;
     [SerializeField] Transform curTarget = null;
@@ -35,9 +42,14 @@ public class Boss : Enemy
     bool isDeadUsed = false;
     #endregion
 
+    bool isJumping = false;
+    float maxHp = 150.0f;
+
     //attack type string
     string[] attackTypeString = { "Projectile Attack 01", "Projectile Attack 02",
                                  "Telekinesis Swing Right", "Telekinesis Swing Left" };
+
+    bool isAimOn = false;
 
     public List<GameObject> targetList;
     private Animator animator;
@@ -50,27 +62,42 @@ public class Boss : Enemy
     private void Awake()
     {
         instance = this;
+        StartCoroutine("StartActionOn");
     }
+
+    IEnumerator StartActionOn()
+    {
+        yield return new WaitForSeconds(1.0f);
+    }
+
     private void OnDestroy()
     {
         instance = null;
     }
     #endregion
-
     private void Start()
     {
         animator = GetComponent<Animator>();
 
         gameObject.SetActive(false);
 
-        hp = 50.0f;
+        hp = 150.0f;
+        maxHp = hp;
         damage = 2.0f;
     }
+
     private void Update()
     {
         if (isDead) return;
+        if(!isAimOn)
+        {
+            isAimOn = true;
+            StartCoroutine("SetAimOn");
+        }
         StateSelector();
+
         curTime += 0.1f;
+        curJumpTimer += 0.1f;
     }
 
     private void StateSelector()
@@ -81,7 +108,14 @@ public class Boss : Enemy
             return;
         }
         curTarget = targetList[0].transform;
- 
+
+        if (curJumpTimer >= jumpTimer && targetList.Count > 1 && !isJumping)
+        {
+            isJumping = true;
+            animator.SetTrigger("Fly Away");
+            curState = STATE.JUMP;
+        }
+
         switch (curState)
         {
             case STATE.IDLE:
@@ -145,6 +179,58 @@ public class Boss : Enemy
         transform.Translate(Vector3.forward * curSpeed * Time.deltaTime); //Move forward
     }
 
+    public void LandingReset()
+    {
+        curJumpTimer = 0.0f;
+        isJumping = false;
+        gameObject.SetActive(true);
+
+        GameObject temp = Instantiate(LandingParticle);
+        temp.transform.position = new Vector3(transform.position.x, transform.position.y + 1.2f,
+                                    transform.position.z);
+        Destroy(temp, 3.0f);
+
+    }
+
+    IEnumerator SetAimOn()
+    {
+        yield return new WaitForSeconds(2.0f);
+        Debug.Log("aim on");
+        aim.SetActive(true);
+    }
+
+    public void JumpAnimationHandler()
+    {
+        aim.SetActive(false);
+        StartCoroutine("PlayFlyingEffect");
+    }
+    IEnumerator PlayFlyingEffect()
+    {
+        yield return new WaitForSeconds(0.02f);
+        GameObject temp = Instantiate(FlyingParticle);
+        temp.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f,
+                                    transform.position.z);
+        Destroy(temp, 3.0f);
+
+    }
+
+    public void JumpAnimationHandler2()
+    {
+        GameObject curTarget;
+        do
+        {
+            curTarget = targetList[Random.Range(0, targetList.Count)];
+        } while (curTarget.tag == "Base");
+        transform.position = new Vector3(curTarget.transform.position.x,
+                                             transform.position.y,
+                                             curTarget.transform.position.z + 3.5f);
+        curState = STATE.IDLE;
+        PickTheTarget();
+        Base.Instance.SetBossOnAgain();
+        isAimOn = false;
+        gameObject.SetActive(false);
+    }
+
     private void CloseRangeAttack()
     {
         int attackIndex = Random.Range(0, 4);
@@ -184,11 +270,6 @@ public class Boss : Enemy
     {
         Destroy(gameObject, 2.0f);
     }
-    public void AimableDelayEventHandler(AnimationEvent animationEvent)
-    {
-        aim.SetActive(true);
-    }
-
     public override void TakeDamage(float dmg)
     {
         base.TakeDamage(dmg);
