@@ -20,11 +20,6 @@ public class UI_Button : MonoBehaviour
 
     public Button ButtonType;
 
-    public void Update()
-    {
-        Debug.Log("AAA");
-    }
-
     public void HoverOnButton()
     {
         //Visual

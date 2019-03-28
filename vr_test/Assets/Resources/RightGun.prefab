@@ -49,7 +49,6 @@ MonoBehaviour:
   reFireTime: 0.15
   hand: {fileID: 0}
   gunLine: {fileID: 818288601}
-  uiLine: {fileID: 634448522817002912}
   effectsDisplayTime: 0.2
   aud: {fileID: 2648234590466892766}
 --- !u!120 &818288601
@@ -703,17 +702,17 @@ PrefabInstance:
     - target: {fileID: 1239256472144007232, guid: 226feaf8347968942a623dd70a8a19cd,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: -0.014498125
+      value: 0.0002
       objectReference: {fileID: 0}
     - target: {fileID: 1239256472144007232, guid: 226feaf8347968942a623dd70a8a19cd,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: -0.014498125
+      value: 0.0002
       objectReference: {fileID: 0}
     - target: {fileID: 1239256472144007232, guid: 226feaf8347968942a623dd70a8a19cd,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: -0.014498125
+      value: 0.0002
       objectReference: {fileID: 0}
     - target: {fileID: 1239256472144007233, guid: 226feaf8347968942a623dd70a8a19cd,
         type: 3}

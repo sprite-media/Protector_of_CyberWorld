@@ -7,10 +7,10 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/MyAssets/Scene/MainMenu.unity
-    guid: 34d5aad03aabacc4cb2837aa8fbf9a9e
+    guid: 33a47a1d5641b634393e8925bdd87821
   - enabled: 1
     path: Assets/MyAssets/Scene/MainMenu_woPlayer.unity
-    guid: e74cfd0eed41b22438b0ed6531bde496
+    guid: 8f0b4d3f9b2142f4b91fa338ae0c6b7f
   - enabled: 1
     path: Assets/MyAssets/Scene/Map.unity
     guid: f6808cc05705bcd4c8f5c81fcfdca6b1

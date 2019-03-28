@@ -45,7 +45,7 @@ public class Base : PlayerBuilding
 			hp = 50;// temp value
 			gameObject.name = "Base";
             UI_parent = GameObject.Find("UI_Parent");
-            /*/
+            //*/
             UI_parent.SetActive(false);
             /*/
             UI_parent.SetActive(true);
