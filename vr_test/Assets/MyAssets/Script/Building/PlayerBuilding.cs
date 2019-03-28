@@ -13,14 +13,14 @@ public class PlayerBuilding : MonoBehaviour
 	{
 		hp = Mathf.Clamp(hp - amt, 0, hp);
 		//Update Health bar
-		if (hp <= 0)
+		if (hp <= 0 && gameObject.tag != "Destroyed")
 		{
 			Death();
 		}
 	}
     public virtual void Death()
     {
-        Boss.Instance.UpdateTargetList(number);
+        Boss.Instance.RemoveFromTargetList(gameObject);
         audio.Play();
     }
 }

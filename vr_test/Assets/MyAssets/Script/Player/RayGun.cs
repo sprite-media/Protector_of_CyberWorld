@@ -4,6 +4,8 @@ public class RayGun : GunParent
 {
     public LineRenderer gunLine;
 
+    private UI_Button hover = null;
+
     public float effectsDisplayTime = 0.2f; // how long lineRenderer will stay in a scene
     int shootableMask; //enemy or should be shootable
     public AudioSource aud;
@@ -50,7 +52,6 @@ public class RayGun : GunParent
             chargingLaser = 0.0f;
             damage = 1.0f;
         }
-     
     }
 
     public void DisableEffects()
@@ -62,15 +63,17 @@ public class RayGun : GunParent
     {
         base.Shoot();
 
-
-        if (chargingLaser < minChargingLaser && isCharging)
+        if (isCharging)
         {
-            NormalShoot();
-        }
+            if (chargingLaser < minChargingLaser)
+            {
+                NormalShoot();
+            }
 
-        if (chargingLaser > minChargingLaser && isCharging)
-        {
-            ChargedLaserShoot();
+            if (chargingLaser > minChargingLaser)
+            {
+                ChargedLaserShoot();
+            }
         }
 
     }
@@ -80,7 +83,6 @@ public class RayGun : GunParent
         GameObject goChargedLaser = (GameObject)Instantiate(ChargedLaser, transform.position, transform.rotation);
         goChargedLaser.GetComponent<Bullet>().damage = damage;
     }
-
     private void NormalShoot()
     {
         //FlashLight

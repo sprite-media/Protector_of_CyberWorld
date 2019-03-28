@@ -132,8 +132,9 @@ public class Tower : PlayerBuilding
 			hp = Mathf.Clamp(hp + partialDestructionDamage, 0, MAX_HP);
 			weapons[dropIndex].gameObject.SetActive(true);
 			gameObject.tag = "Tower";
-
-			return true;
+            Boss.Instance.AddToTargetList(gameObject);
+            //Debug.Log("Added " + gameObject.name);
+            return true;
 		}
 		else
 		{
@@ -142,9 +143,9 @@ public class Tower : PlayerBuilding
 	}
 	public override void TakeDamage(float amt)
 	{
-		base.TakeDamage(amt);
+        hp = Mathf.Clamp(hp - amt, 0, hp);
 
-		int numIteration = (int)((MAX_HP - hp) / partialDestructionDamage);
+        int numIteration = (int)((MAX_HP - hp) / partialDestructionDamage);
 		bool once = false;
 		while(dropIndex < numIteration)
 		{
@@ -162,7 +163,12 @@ public class Tower : PlayerBuilding
 			weapons[dropIndex].gameObject.SetActive(false);
 			dropIndex++;
 		}
-	}
+
+        if (hp <= 0 && gameObject.tag != "Destroyed")
+        {
+            Death();
+        }
+    }
 	public override void Death()
 	{
         base.Death();

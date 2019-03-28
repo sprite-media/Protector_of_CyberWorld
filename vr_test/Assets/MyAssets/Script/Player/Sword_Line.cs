@@ -21,12 +21,17 @@ public class Sword_Line : MonoBehaviour
     private float soundRate = 1.0f;
     private float soundCount = 1.0f;
 
+    private GameObject disappearParticle = null;
+
     float velocity = 0.0f;
     void Awake()
     {
         attackCount = attackRate;
         if (particle == null)
             particle = Resources.Load("Particle_LightsaberHit", typeof(GameObject)) as GameObject;
+
+        disappearParticle = transform.parent.Find("Particle_WeaponDestroy").gameObject;
+        disappearParticle.SetActive(false);
     }
 
     void Update()
@@ -85,7 +90,10 @@ public class Sword_Line : MonoBehaviour
         hand = null;
         grabed = false;
         //Particle effect
-        //Destroy(transform.parent.gameObject);
+        disappearParticle.SetActive(true);
+        disappearParticle.transform.parent = null;
+        Destroy(disappearParticle, 1.0f);
+        Destroy(transform.parent.gameObject);
     }
 
     public void Attack()

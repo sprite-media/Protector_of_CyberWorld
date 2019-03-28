@@ -214,7 +214,25 @@ public class Boss : Enemy
     public void UpdateTargetList(int indexToRemove)
     {
         curState = STATE.IDLE;
+        //Debug.Log("Removing "+targetList[indexToRemove].name);
         targetList.RemoveAt(indexToRemove);
+        PickTheTarget();
+    }
+    public void RemoveFromTargetList(GameObject buildingToRemove)
+    {
+        curState = STATE.IDLE;
+        //Debug.Log("Removing " + buildingToRemove.name);
+        targetList.Remove(buildingToRemove);
+        PickTheTarget();
+    }
+    public void AddToTargetList(GameObject buildingToAdd)
+    {
+        for (int i = 0; i < targetList.Count; i++)
+        {
+            if (targetList[i] == buildingToAdd)
+                return;
+        }
+        targetList.Add(buildingToAdd);
         PickTheTarget();
     }
     #endregion

@@ -15,28 +15,54 @@ public class GunParent : MonoBehaviour
     protected float chargingLaser = 0.0f;
     protected float minChargingLaser = 1.0f;
 
+    private GameObject disappearParticle = null;
     [SerializeField] protected Hand hand;
+
+    public void Awake()
+    {
+        disappearParticle = transform.parent.Find("Particle_WeaponDestroy").gameObject;
+        disappearParticle.SetActive(false);
+    }
 
     public virtual void Update()
     {
         timer += Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && timer >= reFireTime) //for now
+        if (Time.timeScale != 0)
         {
-            Shoot();
-        }
+            if (Input.GetButtonDown("Fire1")) //for now
+            {
+                isCharging = true;
+            }
+            else if (Input.GetButtonUp("Fire1")) //for now
+            {
+                Shoot();
+                isCharging = false;
+            }
 
-        if (hand != null && hand.grabPinchAction.GetStateDown(hand.handType))
+            if (hand != null && hand.grabPinchAction.GetStateDown(hand.handType))
+            {
+                isCharging = true;
+            }
+
+            if (hand != null && hand.grabPinchAction.GetStateUp(hand.handType))
+            {
+                Shoot();
+                isCharging = false;
+            }
+        }
+        else
         {
-            isCharging = true;
-        }
+            if (Input.GetButtonDown("Fire1")) //for now
+            {
+                Shoot();
+            }
 
-        if (hand != null && hand.grabPinchAction.GetStateUp(hand.handType))
-        {
-            Shoot();
-            isCharging = false;
+            if (hand != null && hand.grabPinchAction.GetStateDown(hand.handType))
+            {
+                Shoot();
+            }
         }
-
     }
 
     protected virtual void Shoot()
@@ -49,7 +75,10 @@ public class GunParent : MonoBehaviour
         transform.parent.GetComponent<Rigidbody>().isKinematic = false;
         hand = null;
         //Particle effect
-        //Destroy(transform.parent.gameObject);
+        disappearParticle.SetActive(true);
+        disappearParticle.transform.parent = null;
+        Destroy(disappearParticle, 1.0f);
+        Destroy(transform.parent.gameObject);
     }
     public void Grabbed()
     {

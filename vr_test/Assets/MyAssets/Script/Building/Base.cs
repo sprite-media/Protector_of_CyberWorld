@@ -45,7 +45,7 @@ public class Base : PlayerBuilding
 			hp = 50;// temp value
 			gameObject.name = "Base";
             UI_parent = GameObject.Find("UI_Parent");
-            //*/
+            /*/
             UI_parent.SetActive(false);
             /*/
             UI_parent.SetActive(true);
@@ -65,6 +65,8 @@ public class Base : PlayerBuilding
 
         audio.clip = clips[0];
         audio.Play();
+
+        //Time.timeScale = 0;
     }
 	public override void Death()
 	{
@@ -77,7 +79,7 @@ public class Base : PlayerBuilding
 
         audio.clip = clips[1];
         audio.Play();
-
+        Time.timeScale = 0;
         base.Death();
     }
 
@@ -105,6 +107,7 @@ public class Base : PlayerBuilding
     public void SetTotalNumEnemy(int num)
 	{
 		numEnemiesLeft = num;
+		HUD_NumEnemy.instance.UpdateNumEnemy(numEnemiesLeft);
 	}
     
     public int GetTotalNumEnemy()
@@ -117,13 +120,14 @@ public class Base : PlayerBuilding
 	{
 		numEnemiesLeft--;
 		//Update indicator
+		HUD_NumEnemy.instance.UpdateNumEnemy(numEnemiesLeft);
 		if (numEnemiesLeft == 0)
 		{
 			GameObject.Find("Base").GetComponent<Base>().Win();
 		}
         else if(numEnemiesLeft == 1)
         {
-            StartCoroutine(SpawnBossToStage());
+           StartCoroutine(SpawnBossToStage());
         }
 	}
 
